@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import br.com.serratec.ecommerce.repository.UsuarioRepository;
 import br.com.serratec.ecommerce.model.Usuario;
 
@@ -31,6 +32,10 @@ public class UsuarioService {
 
     public Usuario adcionar(Usuario usuario){
         usuario.setId(0);
+
+        // Criptografando a senha antes de salvar no bd
+        usuario.setSenha(BCrypt.withDefaults().hashToString(12, usuario.getSenha().toCharArray()));
+        
         usuario = usuarioRepository.save(usuario);
         return usuario;
     }
