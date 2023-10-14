@@ -15,25 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.service.UsuarioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/usuarios")
+@Api(value = "USUARIOS")
 public class UsuarioControler {
 
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping
+    @ApiOperation(value = "RETORNA UMA LISTA COM TODOS ")
     public ResponseEntity<List<Usuario>> obterTodos(){
         return ResponseEntity.ok(usuarioService.obterTodos());
     }
     
     @GetMapping("/{id}")
+    @ApiOperation(value = "RETORNA UM EXPECIFICO PELO ID ")
     public ResponseEntity<Usuario> obterPorId(@PathVariable long id){
         return ResponseEntity.ok(usuarioService.obterPorId(id));
     }
 
     @PostMapping
+    @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public ResponseEntity<Usuario> adicionar(@RequestBody Usuario usuario){
         Usuario usuarioAdicionado = usuarioService.adcionar(usuario);
 
@@ -43,7 +49,8 @@ public class UsuarioControler {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> adicionar(@PathVariable long id, @RequestBody Usuario usuario){
+    @ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
+    public ResponseEntity<Usuario> atualizar(@PathVariable long id, @RequestBody Usuario usuario){
         Usuario usuarioAtualizado = usuarioService.atualizar(id, usuario);
 
         return ResponseEntity
@@ -52,6 +59,7 @@ public class UsuarioControler {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
     public ResponseEntity<?> deletar(@PathVariable long id){
         usuarioService.deletar(id);
 

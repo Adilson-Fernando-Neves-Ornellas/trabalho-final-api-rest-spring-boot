@@ -58,11 +58,23 @@
 			<version>3.1.1</version>
 		</dependency>
 
-		<!-- Swagger-->
-		<dependency>
+		<!-- Swagger que não precisa de cofig porem não funcionava o upload image-->
+		<!-- <dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.7.0</version>
+		</dependency> -->
+
+		<!-- _____ dependencias do swagger p funciona o upload image _______-->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+		<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
 		</dependency>
 
 	</dependencies>

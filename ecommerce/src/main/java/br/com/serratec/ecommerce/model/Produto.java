@@ -30,8 +30,12 @@ public class Produto {
     @Column(nullable = false)
     private String descricaoProd;
 
-    @Column(nullable = false)
+
     private String imgbase64Prod;
+
+    private String nomeFile;
+
+    private String pathFile;
 
     // @OneToOne(mappedBy = "idCategoria")
     // private Categoria categoria;
@@ -47,7 +51,9 @@ public class Produto {
         int estoqueProd, 
         boolean statusProd,
         String descricaoProd, 
-        String imgbase64Prod 
+        String imgbase64Prod,
+        String nomeFile,
+        String pathFile
         // Categoria categoria
         ) {
         this.idProd = idProd;
@@ -57,6 +63,8 @@ public class Produto {
         this.statusProd = statusProd;
         this.descricaoProd = descricaoProd;
         this.imgbase64Prod = imgbase64Prod;
+        this.nomeFile = nomeFile;
+        this.pathFile = pathFile;
         // this.categoria = categoria;
     }
 
@@ -116,6 +124,22 @@ public class Produto {
 
     public void setImgbase64Prod(String imgbase64Prod) {
         this.imgbase64Prod = imgbase64Prod;
+    }
+    
+    public String getNomeFile() {
+        return nomeFile;
+    }
+
+    public void setNomeFile(String nomeFile) {
+        this.nomeFile = nomeFile;
+    }
+
+    public String getPathFile() {
+        return pathFile;
+    }
+
+    public void setPathFile(String pathFile) {
+       this.pathFile = pathFile;
     }
 
     // public Categoria getCategoria() {
