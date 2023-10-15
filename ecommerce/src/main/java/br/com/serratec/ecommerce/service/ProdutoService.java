@@ -2,12 +2,19 @@ package br.com.serratec.ecommerce.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
+import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
+import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class ProdutoService {
@@ -15,34 +22,49 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepositoryAction;
 
-    public List<Produto> obterTodos(){
-        return produtoRepositoryAction.findAll();
+    @Autowired
+    private ModelMapper modelMapper;
+
+    public List<ProdutoResponseDTO> obterTodos() {
+
+        return produtoRepositoryAction.findAll()
+                .stream()
+                .map(produto -> modelMapper.map(produto, ProdutoResponseDTO.class))
+                .collect(Collectors.toList());
     }
 
-    public Produto obterPorId(Long id){
+    public ProdutoResponseDTO obterPorId(Long id) {
         Optional<Produto> optProduto = produtoRepositoryAction.findById(id);
 
-        if(optProduto.isEmpty()){
-            throw new RuntimeException("Nenhum registro encontardo para o id: "+ id);
+        if (optProduto.isEmpty()) {
+            throw new RuntimeException("Nenhum registro encontardo para o id: " + id);
         }
-        return optProduto.get();
+        return modelMapper.map(optProduto.get(), ProdutoResponseDTO.class);
     }
 
-    public Produto adcionar(Produto Produto){
-        Produto.setIdProd(0l);        
-        Produto = produtoRepositoryAction.save(Produto);
-        return Produto;
+    @Transactional
+    public ProdutoResponseDTO adcionar(ProdutoRequestDTO produtoRequest) {
+
+        Produto produto = modelMapper.map(produtoRequest, Produto.class);
+        produto.setIdProd(0l);
+
+        produto = produtoRepositoryAction.save(produto);
+
+        return modelMapper.map(produto, ProdutoResponseDTO.class);
     }
 
-    public Produto atualizar(Long id, Produto Produto){
+    public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produtoRequest) {
         obterPorId(id);
-        Produto.setIdProd(id);
-        return produtoRepositoryAction.save(Produto);
+
+        Produto produto = modelMapper.map(produtoRequest, Produto.class);
+        produto.setIdProd(id);
+
+        return modelMapper.map(produtoRepositoryAction.save(produto), ProdutoResponseDTO.class);
     }
 
-    public void deletar(long id){
+    public void deletar(long id) {
         obterPorId(id);
         produtoRepositoryAction.deleteById(id);
     }
-    
+
 }
