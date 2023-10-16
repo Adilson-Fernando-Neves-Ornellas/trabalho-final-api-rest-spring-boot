@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
+import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.service.UsuarioService;
 import io.swagger.annotations.Api;
@@ -28,20 +30,20 @@ public class UsuarioControler {
 
     @GetMapping
     @ApiOperation(value = "RETORNA UMA LISTA COM TODOS ")
-    public ResponseEntity<List<Usuario>> obterTodos(){
+    public ResponseEntity<List<UsuarioResponseDTO>> obterTodos(){
         return ResponseEntity.ok(usuarioService.obterTodos());
     }
     
     @GetMapping("/{id}")
     @ApiOperation(value = "RETORNA UM EXPECIFICO PELO ID ")
-    public ResponseEntity<Usuario> obterPorId(@PathVariable long id){
+    public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable long id){
         return ResponseEntity.ok(usuarioService.obterPorId(id));
     }
 
     @PostMapping
     @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
-    public ResponseEntity<Usuario> adicionar(@RequestBody Usuario usuario){
-        Usuario usuarioAdicionado = usuarioService.adcionar(usuario);
+    public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
+        UsuarioResponseDTO usuarioAdicionado = usuarioService.adcionar(usuario);
 
         return ResponseEntity
             .status(201)
@@ -50,8 +52,8 @@ public class UsuarioControler {
 
     @PutMapping("/{id}")
     @ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
-    public ResponseEntity<Usuario> atualizar(@PathVariable long id, @RequestBody Usuario usuario){
-        Usuario usuarioAtualizado = usuarioService.atualizar(id, usuario);
+    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
+        UsuarioResponseDTO usuarioAtualizado = usuarioService.atualizar(id, usuario);
 
         return ResponseEntity
             .status(201)
