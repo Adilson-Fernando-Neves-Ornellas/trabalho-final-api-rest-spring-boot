@@ -1,0 +1,17 @@
+GET http://localhost:8080/usuarios
+###
+
+GET http://localhost:8080/usuarios/1
+###
+
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+    "nmUsuario": "Rorivaldo",
+    "login": "rorivaldinho1",
+    "senha": "12345",
+    "email": "rorivaldo1@gmail.com",
+    "telefone": "21992929291",
+    "perfil": "ADMIN"
+}

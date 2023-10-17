@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 import javax.persistence.OneToOne;
 
 @Entity
@@ -13,6 +12,7 @@ public class Produto {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProduto")
     private long idProd;
 
     @Column(nullable = false)
@@ -39,6 +39,9 @@ public class Produto {
 
     // @OneToOne(mappedBy = "idCategoria")
     // private Categoria categoria;
+
+    @OneToOne(mappedBy = "produto")
+    private PedidoItens pedidoItem;
 
     // constructors
     public Produto() {
@@ -140,6 +143,18 @@ public class Produto {
 
     public void setPathFile(String pathFile) {
        this.pathFile = pathFile;
+    }
+
+    public void setIdProd(long idProd) {
+        this.idProd = idProd;
+    }
+
+    public PedidoItens getPedidoItem() {
+        return pedidoItem;
+    }
+
+    public void setPedidoItem(PedidoItens pedidoItem) {
+        this.pedidoItem = pedidoItem;
     }
 
     // public Categoria getCategoria() {

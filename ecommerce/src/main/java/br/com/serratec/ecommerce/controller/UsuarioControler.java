@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
-import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.model.email.Email;
 import br.com.serratec.ecommerce.service.EmailService;
+
 import br.com.serratec.ecommerce.service.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -48,6 +48,7 @@ public class UsuarioControler {
     public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAdicionado = usuarioService.adcionar(usuario);
         testeEnvioDeEmail(usuario.getEmail());
+
         return ResponseEntity
             .status(201)
             .body(usuarioAdicionado);
@@ -57,6 +58,7 @@ public class UsuarioControler {
     @ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
     public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAtualizado = usuarioService.atualizar(id, usuario);
+
 
         return ResponseEntity
             .status(201)

@@ -1,8 +1,10 @@
+
 package br.com.serratec.ecommerce.dto.usuario;
 
-
+import java.util.List;
 
 import br.com.serratec.ecommerce.enums.Perfil;
+import br.com.serratec.ecommerce.model.Pedido;
 
 public abstract class UsuarioBaseDTO {
    
@@ -15,6 +17,16 @@ public abstract class UsuarioBaseDTO {
 
     private String fotoUsuario;
 
+    private List<Pedido> pedidos;
+
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 
     public String getNmUsuario() {
         return nmUsuario;
@@ -50,3 +62,4 @@ public abstract class UsuarioBaseDTO {
 
     
 }
+

@@ -2,7 +2,7 @@ package br.com.serratec.ecommerce.dto.produto;
 
 public abstract class ProdutoBaseDTO {
 
-    private long id;
+    private long idProd;
     private String nomeProd;
     private double valorProd;
     private int estoqueProd;
@@ -10,13 +10,22 @@ public abstract class ProdutoBaseDTO {
     private String imgbase64Prod;
     private String nomeFile;
     private String pathFile;
+    private Long idPedidoItens;// remover depois
 
-    public long getId() {
-        return id;
+    public Long getIdPedidoItens() {
+        return idPedidoItens;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdPedidoItens(Long idPedidoItens) {
+        this.idPedidoItens = idPedidoItens;
+    }
+
+    public long getId() {
+        return idProd;
+    }
+
+    public void setId(long idProd) {
+        this.idProd = idProd;
     }
 
     public String getNomeProd() {

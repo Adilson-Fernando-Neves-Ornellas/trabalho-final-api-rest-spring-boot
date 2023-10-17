@@ -1,12 +1,11 @@
+
 package br.com.serratec.ecommerce.dto.usuario;
 
 import java.util.Date;
 
 public class UsuarioResponseDTO extends UsuarioBaseDTO{
    
-    private Date dataCadastro;
-
-    
+    private Date dataCadastro; 
 
     public Date getDataCadastro() {
         return dataCadastro;
@@ -16,5 +15,5 @@ public class UsuarioResponseDTO extends UsuarioBaseDTO{
         this.dataCadastro = dataCadastro;
     }
 
-    
 }
+

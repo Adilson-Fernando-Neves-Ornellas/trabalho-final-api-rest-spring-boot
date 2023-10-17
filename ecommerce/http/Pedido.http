@@ -1,0 +1,28 @@
+GET http://localhost:8080/pedidos
+###
+
+GET http://localhost:8080/pedidos/1
+###
+
+POST http://localhost:8080/pedidos
+Content-Type: application/json
+
+{
+    "descontoTotal": 0,
+    "acrescimoTotal": 0,
+    "valorFinal": 0,
+    "formaPagamento": "PIX",
+    "idUsuario": 1,
+    "pedidoItens": [
+        {
+            "produto": {
+                "idProd": 1
+            },
+            "descProduto": 0,
+            "acresProduto": 0,
+            "quantidade": 2
+        }
+    ]
+}
+###
+
