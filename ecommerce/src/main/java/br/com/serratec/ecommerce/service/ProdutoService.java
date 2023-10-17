@@ -2,7 +2,6 @@ package br.com.serratec.ecommerce.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -14,7 +13,6 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
-import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class ProdutoService {

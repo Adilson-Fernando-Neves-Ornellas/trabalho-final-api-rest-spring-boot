@@ -1,0 +1,28 @@
+GET http://localhost:8080/produtos
+###
+
+GET http://localhost:8080/produtos/1
+###
+
+POST http://localhost:8080/produtos
+Content-Type: application/json
+
+{
+    "nomeProd": "Sabonete",
+    "valorProd": "2.50",
+    "estoqueProd": "20",
+    "statusProd": true,
+    "descricaoProd": "sabonetex"
+}
+###
+
+POST http://localhost:8080/produtos
+Content-Type: application/json
+
+{
+    "nomeProd": "Abobrinha",
+    "valorProd": "1700.50",
+    "estoqueProd": "10",
+    "statusProd": true,
+    "descricaoProd": "Abobrinha caríssima"
+}

@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
-import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.service.ProdutoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

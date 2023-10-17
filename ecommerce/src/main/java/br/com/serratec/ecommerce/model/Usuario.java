@@ -3,6 +3,7 @@ package br.com.serratec.ecommerce.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.OneToMany;
+import javax.persistence.OneToMany;
 
 import br.com.serratec.ecommerce.enums.Perfil;
 
@@ -43,18 +45,18 @@ public class Usuario {
 
     private String fotoUsuario;
 
-    // @OneToMany(mappedBy = "usuario")
-    // private Pedido pedido;
+    @OneToMany(mappedBy = "usuario")
+    private List<Pedido> pedidos;
 
     // @OneToMany(mappedBy = "usuario")
     // private Log log;
-
-    
+   
     public Usuario(){
         this.dataCadastro = new Date();
-    }
-    
-    public Usuario(long id, String nmUsuario, String login, String senha, String email, String telefone, Perfil perfil,String fotoUsuario) {
+    }   
+
+    public Usuario(long id, String nmUsuario, String login, String senha, String email, String telefone,
+            Perfil perfil, String fotoUsuario, List<Pedido> pedidos) {
         this.id = id;
         this.nmUsuario = nmUsuario;
         this.login = login;
@@ -64,8 +66,9 @@ public class Usuario {
         this.dataCadastro = new Date();
         this.perfil = perfil;
         this.fotoUsuario = fotoUsuario;
+        this.pedidos = pedidos;
     }
-    
+
     public long getId() {
         return id;
     }
@@ -118,8 +121,8 @@ public class Usuario {
         return dataCadastro;
     }
     
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setDataCadastro() {
+        this.dataCadastro = new Date();
     }
     
     public Perfil getPerfil() {
@@ -130,13 +133,6 @@ public class Usuario {
         this.perfil = perfil;
     }
     
-    // public Pedido getPedido() {
-        //     return pedido;
-        // }
-        
-        // public void setPedido(Pedido pedido) {
-            //     this.pedido = pedido;
-            // }
             
             // public Log getLog() {
                 //     return log;
@@ -152,6 +148,14 @@ public class Usuario {
     
         public void setFotoUsuario(String fotoUsuario) {
             this.fotoUsuario = fotoUsuario;
+        }
+
+        public List<Pedido> getPedido() {
+            return pedidos;
+        }
+
+        public void setPedido(List<Pedido> pedidos) {
+            this.pedidos = pedidos;
         }
         
     }
