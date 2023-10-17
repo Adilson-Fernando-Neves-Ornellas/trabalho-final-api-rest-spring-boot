@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensRequestDTO;
 import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensResponseDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
-import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.PedidoItens;
 import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.repository.PedidoItensRepository;

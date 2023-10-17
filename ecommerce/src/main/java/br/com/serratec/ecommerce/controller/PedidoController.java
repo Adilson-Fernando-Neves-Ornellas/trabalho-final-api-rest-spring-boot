@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
+import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.service.PedidoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,6 +27,10 @@ public class PedidoController {
     
     @Autowired
     private PedidoService pedidoService;
+
+    public PedidoController(PedidoService pedidoService) {
+        this.pedidoService = pedidoService;
+    }
 
     @GetMapping
     @ApiOperation(value = "RETORNA UMA LISTA COM TODOS")
@@ -39,14 +44,19 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoService.obterPorId(id));
     } 
 
-    @PostMapping
-    @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
-    public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedidoRequst) {
-        PedidoResponseDTO pedidoAdicionado = pedidoService.adicionar(pedidoRequst);
+    // @PostMapping
+    // @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
+    // public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedidoRequst) {
+    //     PedidoResponseDTO pedidoAdicionado = pedidoService.adicionar(pedidoRequst);
 
-        return ResponseEntity
-            .status(201)
-            .body(pedidoAdicionado);
+    //     return ResponseEntity
+    //         .status(201)
+    //         .body(pedidoAdicionado);
+    // }
+
+    @PostMapping
+    public Pedido savePedido(@RequestBody Pedido pedido) {
+        return pedidoService.savePedido(pedido);
     }
 
     @PutMapping("/{id}")

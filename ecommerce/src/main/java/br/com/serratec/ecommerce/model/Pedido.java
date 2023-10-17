@@ -1,8 +1,10 @@
 package br.com.serratec.ecommerce.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,25 +40,32 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-  
-    @OneToMany(mappedBy = "pedido")
-    private List<PedidoItens> pedidoItens;
+    
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    private List<PedidoItens> itens = new ArrayList<>();
+
+    public void adicionarItem(PedidoItens item) {
+        itens.add(item);
+        item.setPedido(this);
+    }
 
     public Pedido() {
         this.dataCompra = new Date();
     }
 
-    public Pedido(long idPedido, double descontoTotal, double acrescimoTotal, double valorFinal, Date dataCompra,
-            FormaPagamento formaPagamento, Usuario usuario, List<PedidoItens> pedidoItens) {
+    
+    public Pedido(long idPedido, double descontoTotal, double acrescimoTotal, double valorFinal,
+            FormaPagamento formaPagamento, Usuario usuario, List<PedidoItens> itens) {
         this.idPedido = idPedido;
         this.descontoTotal = descontoTotal;
         this.acrescimoTotal = acrescimoTotal;
         this.valorFinal = valorFinal;
-        this.dataCompra = dataCompra;
+        this.dataCompra = new Date();
         this.formaPagamento = formaPagamento;
         this.usuario = usuario;
-        this.pedidoItens = pedidoItens;
+        this.itens = itens;
     }
+
 
     public long getIdPedido() {
         return idPedido;
@@ -94,8 +103,8 @@ public class Pedido {
         return dataCompra;
     }
 
-    public void setDataCompra() {
-        this.dataCompra = new Date();
+    public void setDataCompra(Date dataCompra) {
+        this.dataCompra = dataCompra;
     }
 
     public FormaPagamento getFormaPagamento() {
@@ -105,7 +114,7 @@ public class Pedido {
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -114,12 +123,12 @@ public class Pedido {
         this.usuario = usuario;
     }
 
-      public List<PedidoItens> getPedidoItens() {
-        return pedidoItens;
+    public List<PedidoItens> getItens() {
+        return itens;
     }
 
-    public void setPedidoItens(List<PedidoItens> pedidoItens) {
-        this.pedidoItens = pedidoItens;
+    public void setItens(List<PedidoItens> itens) {
+        this.itens = itens;
     }
 
     

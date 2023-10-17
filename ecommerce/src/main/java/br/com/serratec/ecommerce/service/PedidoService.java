@@ -1,6 +1,7 @@
 package br.com.serratec.ecommerce.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,9 +37,6 @@ public class PedidoService {
     private UsuarioService usuarioService;
 
     @Autowired
-    private ProdutoService produtoService;
-
-    @Autowired
     public ModelMapper mapper;
 
     public List<PedidoResponseDTO> obterTodos() {
@@ -59,17 +57,22 @@ public class PedidoService {
         return mapper.map(optPedido.get(), PedidoResponseDTO.class);
     }
 
-    @Transactional
-    public PedidoResponseDTO adicionar(PedidoRequestDTO pedidoRequest) {
-        
-        Pedido pedidoModel = adicionarPedido(pedidoRequest);
-        pedidoRequest.setId(pedidoModel.getIdPedido());
+    // @Transactional
+    // public PedidoResponseDTO adicionar(PedidoRequestDTO pedidoRequest) {
+           
+    //     Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
+    //     pedidoModel.setIdPedido(0);
+    //     pedidoModel = pedidoRepository.save(pedidoModel);
 
-        List<PedidoItens> pedidoItens = adicionarPedidoItens(pedidoRequest.getPedidoItens(), pedidoModel);
+    //     return mapper.map(pedidoModel, PedidoResponseDTO.class);
+    // }
 
-        pedidoModel.setPedidoItens(pedidoItens);
-
-        return mapper.map(pedidoModel, PedidoResponseDTO.class);
+    public Pedido savePedido(Pedido pedido) {
+        // Antes de salvar o pedido, associe os itens ao pedido
+        for (PedidoItens item : pedido.getItens()) {
+            item.setPedido(pedido);
+        }
+        return pedidoRepository.save(pedido);
     }
 
     public PedidoResponseDTO atualizar(long id, PedidoRequestDTO pedidoRequest) {
@@ -78,11 +81,9 @@ public class PedidoService {
         pedidoRequest.setId(id);
 
         Pedido pedidoModel = pedidoRepository.save(mapper.map(pedidoRequest, Pedido.class));   
-
-
-
         return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
+
 
     public void deletar(long id) {
         obterPorId(id);
@@ -93,7 +94,7 @@ public class PedidoService {
 
         Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
         pedidoModel.setIdPedido(0);
-        pedidoModel.setDataCompra();
+        pedidoModel.setDataCompra(new Date());
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedidoRequest.getIdUsuario());
         pedidoModel.setUsuario(mapper.map(usuarioResponse, Usuario.class));
         pedidoModel = pedidoRepository.save(pedidoModel);
@@ -113,15 +114,7 @@ public class PedidoService {
 
             pedidoItensService.adicionar(mapper.map(pedidoItem, PedidoItensRequestDTO.class));
 
-
-
-/* 
-            pedidoItemRequest.setIdPedido(pedidoRequest.getId());
-
-            pedidoItemResponse = pedidoItensService.adicionar(pedidoItemRequest);
-
-            adicionados.add(mapper.map(pedidoItemResponse, PedidoItens.class));
-*/
+            adicionados.add(pedidoItem);
         }
 
         return adicionados;

@@ -2,6 +2,7 @@ package br.com.serratec.ecommerce.model;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,7 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 //import javax.persistence.OneToMany;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
+
+//import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.serratec.ecommerce.enums.Perfil;
 
@@ -45,8 +48,9 @@ public class Usuario {
 
     private String fotoUsuario;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Pedido> pedidos;
+    // @OneToMany(mappedBy = "usuario")
+    // @JsonBackReference
+    // private List<Pedido> pedidos;
 
     // @OneToMany(mappedBy = "usuario")
     // private Log log;
@@ -56,7 +60,7 @@ public class Usuario {
     }   
 
     public Usuario(long id, String nmUsuario, String login, String senha, String email, String telefone,
-            Perfil perfil, String fotoUsuario, List<Pedido> pedidos) {
+            Perfil perfil, String fotoUsuario) {
         this.id = id;
         this.nmUsuario = nmUsuario;
         this.login = login;
@@ -66,7 +70,7 @@ public class Usuario {
         this.dataCadastro = new Date();
         this.perfil = perfil;
         this.fotoUsuario = fotoUsuario;
-        this.pedidos = pedidos;
+       
     }
 
     public long getId() {
@@ -132,31 +136,22 @@ public class Usuario {
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
-    
-            
-            // public Log getLog() {
-                //     return log;
-                // }
-
-    // public void setLog(Log log) {
-        //     this.log = log;
-        // }
         
-        public String getFotoUsuario() {
-            return fotoUsuario;
-        }
+    public String getFotoUsuario() {
+        return fotoUsuario;
+    }
+
+    public void setFotoUsuario(String fotoUsuario) {
+        this.fotoUsuario = fotoUsuario;
+    }
+
+    // public List<Pedido> getPedido() {
+    //     return pedidos;
+    // }
+
+    // public void setPedido(List<Pedido> pedidos) {
+    //     this.pedidos = pedidos;
+    // }
     
-        public void setFotoUsuario(String fotoUsuario) {
-            this.fotoUsuario = fotoUsuario;
-        }
-
-        public List<Pedido> getPedido() {
-            return pedidos;
-        }
-
-        public void setPedido(List<Pedido> pedidos) {
-            this.pedidos = pedidos;
-        }
-        
     }
     
