@@ -13,7 +13,7 @@ import br.com.serratec.ecommerce.model.Log;
 import br.com.serratec.ecommerce.service.LogService;
 
 
-
+// controlle log
 @RestController
 @RequestMapping("/logs")
 public class LogController {
