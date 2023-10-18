@@ -1,7 +1,7 @@
 GET http://localhost:8080/pedidos
 ###
 
-GET http://localhost:8080/pedidos/1
+GET http://localhost:8080/pedidos/2
 ###
 
 POST http://localhost:8080/pedidos
@@ -19,7 +19,7 @@ Content-Type: application/json
             },
             "descProduto": 0,
             "acresProduto": 0,
-            "quantidade": 5
+            "quantidade": 20
         },
         {
             "produto": {
@@ -27,9 +27,12 @@ Content-Type: application/json
             },
             "descProduto": 0,
             "acresProduto": 5,
-            "quantidade": 3
+            "quantidade": 30
         }
     ]
 }
+###
+
+DELETE http://localhost:8080/pedidos/3
 ###
 

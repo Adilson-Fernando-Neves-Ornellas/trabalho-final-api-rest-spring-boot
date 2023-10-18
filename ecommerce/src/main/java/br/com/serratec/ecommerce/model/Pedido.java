@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.serratec.ecommerce.enums.FormaPagamento;
 
 @Entity
@@ -39,6 +41,7 @@ public class Pedido {
  
     @ManyToOne
     @JoinColumn(name = "idUsuario")
+    @JsonIgnore
     private Usuario usuario;
     
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)

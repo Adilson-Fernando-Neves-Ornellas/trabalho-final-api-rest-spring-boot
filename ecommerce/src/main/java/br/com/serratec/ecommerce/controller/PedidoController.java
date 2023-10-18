@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
-
 import br.com.serratec.ecommerce.service.PedidoService;
 
 @RestController
@@ -39,16 +38,6 @@ public class PedidoController {
         return ResponseEntity.ok(pedidoService.obterPorId(id));
     } 
 
-    // @PostMapping
-    // @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
-    // public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedidoRequst) {
-    //     PedidoResponseDTO pedidoAdicionado = pedidoService.adicionar(pedidoRequst);
-
-    //     return ResponseEntity
-    //         .status(201)
-    //         .body(pedidoAdicionado);
-    // }
-
     @PostMapping
     //@ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
@@ -66,7 +55,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/{id}")
-    //@ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
+     //@ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
     public ResponseEntity<?> deletar(@PathVariable long id) {
         pedidoService.deletar(id);
 

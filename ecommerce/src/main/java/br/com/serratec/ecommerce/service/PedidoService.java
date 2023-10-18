@@ -23,7 +23,7 @@ public class PedidoService {
     
     @Autowired
     private PedidoRespository pedidoRepository;
-
+    
     @Autowired
     private ProdutoService produtoService;
 
@@ -46,16 +46,6 @@ public class PedidoService {
         }
 
         return mapper.map(optPedido.get(), PedidoResponseDTO.class);
-    }
-
-    @Transactional
-    public PedidoResponseDTO adicionar(PedidoRequestDTO pedidoRequest) {
-           
-        Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
-        pedidoModel.setIdPedido(0);
-        pedidoModel = pedidoRepository.save(pedidoModel);
-
-        return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
 
     @Transactional
@@ -86,39 +76,10 @@ public class PedidoService {
 
     public void deletar(long id) {
         obterPorId(id);
+
         pedidoRepository.deleteById(id);
     }
- /* 
-    private Pedido adicionarPedido(PedidoRequestDTO pedidoRequest) {
 
-        Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
-        pedidoModel.setIdPedido(0);
-        pedidoModel.setDataCompra(new Date());
-        UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedidoRequest.getIdUsuario());
-        pedidoModel.setUsuario(mapper.map(usuarioResponse, Usuario.class));
-        pedidoModel = pedidoRepository.save(pedidoModel);
-
-        return pedidoModel;
-    }
-
-    private List<PedidoItens> adicionarPedidoItens(List<PedidoItensRequestDTO> pedidoItensRequest, Pedido pedidoModel) {
-
-        List<PedidoItens> adicionados = new ArrayList<>();
-      
-        for (PedidoItensRequestDTO pedidoItemRequest : pedidoItensRequest){
-
-            PedidoItens pedidoItem = mapper.map(pedidoItemRequest, PedidoItens.class);
-
-            pedidoItem.setPedido(pedidoModel);
-
-            pedidoItensService.adicionar(mapper.map(pedidoItem, PedidoItensRequestDTO.class));
-
-            adicionados.add(pedidoItem);
-        }
-
-        return adicionados;
-    }
- */
 
     private PedidoItens adicionarValorTotalItem(PedidoItens item) {
         long idProd = item.getProduto().getIdProd();
