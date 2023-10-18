@@ -1,7 +1,7 @@
 package br.com.serratec.ecommerce.service;
 
+import java.util.Collections;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,35 +10,53 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
+
+import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
-import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.repository.UsuarioRepository;
+import br.com.serratec.ecommerce.security.JWTService;
 
 @Service
-public class UsuarioService {
+public class UsuarioService  {
 
+    private static final String BEARER = "Bearer ";
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    //@Autowired
+    //private PedidoService pedidoService;
+
     @Autowired
-    private PedidoService pedidoService;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JWTService jwtService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     private ModelMapper modelMapper;
 
+    
     public List<UsuarioResponseDTO> obterTodos(){
-        return usuarioRepository.findAll()
-            .stream()
+        List<Usuario> usuarios = usuarioRepository.findAll();
+
+        return usuarios.stream()
             .map(usuario -> modelMapper.map(usuario, UsuarioResponseDTO.class))
             .collect(Collectors.toList());
     }
 
+    
     public UsuarioResponseDTO obterPorId(Long id){
         Optional<Usuario> optUsuario = usuarioRepository.findById(id);
 
@@ -51,12 +69,16 @@ public class UsuarioService {
     @Transactional
     public UsuarioResponseDTO adcionar(UsuarioRequestDTO usuarioRequest){
         
-        Usuario usuarioModel = adicionUsuario(usuarioRequest);
+        Usuario usuario = modelMapper.map(usuarioRequest, Usuario.class);
        
-        //List<Pedido> pedidos = adicionarPedidos(usuarioRequest.getPedidos(), usuarioModel);
-        //usuarioModel.setPedido(pedidos);
+        String senha = passwordEncoder.encode(usuario.getPassword());
 
-        return modelMapper.map(usuarioModel, UsuarioResponseDTO.class);
+        usuario.setSenha(senha);
+        usuario.setId(0);
+
+        usuario = usuarioRepository.save(usuario);
+
+        return modelMapper.map(usuario, UsuarioResponseDTO.class);
     }
 
     public UsuarioResponseDTO atualizar(Long id, UsuarioRequestDTO usuarioRequest){
@@ -74,27 +96,21 @@ public class UsuarioService {
         obterPorId(id);
         usuarioRepository.deleteById(id);
     }
-    
-    private Usuario adicionUsuario(UsuarioRequestDTO usuarioRequest){
-        Usuario usuarioModel = modelMapper.map(usuarioRequest, Usuario.class);
-        usuarioModel.setId(0);
-        usuarioModel = usuarioRepository.save(usuarioModel);
-        return usuarioModel;
+
+    public UsuarioResponseDTO obterPorEmail(String email){
+        Optional<Usuario> optUsuario =  usuarioRepository.findByEmail(email);
+
+        return modelMapper.map(optUsuario.get(),UsuarioResponseDTO.class);
     }
 
-    // private List<Pedido> adicionarPedidos(List<PedidoRequestDTO> pedRequest, Usuario usuarioModel){
-        
-    //     List<Pedido> adicionados = new ArrayList<>();
+    public UsuarioLoginResponseDTO logar(String email, String senha){
+        Authentication autenticacao = authenticationManager
+            .authenticate(new UsernamePasswordAuthenticationToken(email, senha,Collections.emptyList()));
+            SecurityContextHolder.getContext().setAuthentication(autenticacao);
+            String token = BEARER + jwtService.gerarToken(autenticacao);
+            UsuarioResponseDTO usuarioResponse = obterPorEmail(email);
+            return new UsuarioLoginResponseDTO(token, usuarioResponse);
 
-    //     for(PedidoRequestDTO pedidoResquest : pedRequest){
-    //         Pedido pedido = modelMapper.map(pedidoResquest, Pedido.class);
 
-    //         pedido.setUsuario(usuarioModel);
-
-    //         pedidoService.adicionar(modelMapper.map(pedido, PedidoRequestDTO.class));
-
-    //         adicionados.add(pedido);
-    //     }
-    //     return adicionados;
-    // }
+    }
 }

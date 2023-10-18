@@ -1,10 +1,7 @@
 package br.com.serratec.ecommerce.model;
 
-
-
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +11,15 @@ import javax.persistence.Id;
 //import javax.persistence.OneToMany;
 //import javax.persistence.OneToMany;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.serratec.ecommerce.enums.Perfil;
 
 @Entity
-public class Usuario {
+public class Usuario implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
@@ -47,13 +47,6 @@ public class Usuario {
     private Perfil perfil;
 
     private String fotoUsuario;
-
-    // @OneToMany(mappedBy = "usuario")
-    // @JsonBackReference
-    // private List<Pedido> pedidos;
-
-    // @OneToMany(mappedBy = "usuario")
-    // private Log log;
    
     public Usuario(){
         this.dataCadastro = new Date();
@@ -73,7 +66,7 @@ public class Usuario {
        
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
     
@@ -145,13 +138,40 @@ public class Usuario {
         this.fotoUsuario = fotoUsuario;
     }
 
-    // public List<Pedido> getPedido() {
-    //     return pedidos;
-    // }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
-    // public void setPedido(List<Pedido> pedidos) {
-    //     this.pedidos = pedidos;
-    // }
+    @Override
+    public String getPassword() {
+        return senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
     
     }
     

@@ -8,10 +8,19 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-    "nmUsuario": "Rorivaldo",
-    "login": "rorivaldinho1",
-    "senha": "12345",
-    "email": "rorivaldo1@gmail.com",
-    "telefone": "21992929291",
+    "nmUsuario": "Rorivaldo3",
+    "login": "rorivaldinho3",
+    "senha": "1234567",
+    "email": "rorivadfg3@gmail.com",
+    "telefone": "219929456293",
     "perfil": "ADMIN"
+}
+###
+
+POST http://localhost:8080/usuarios/login
+Content-Type: application/json
+
+{
+    "email": "rorivadfg1@gmail.com",
+    "senha": "1234567"
 }
