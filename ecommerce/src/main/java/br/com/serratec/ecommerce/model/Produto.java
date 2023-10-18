@@ -7,7 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 
 
@@ -37,24 +43,21 @@ public class Produto {
 
     @ManyToOne
     @JoinColumn(name = "idCategoria")
+    @JsonBackReference
     private Categoria categoria;
 
     public Produto() {
     }
 
-    public Produto(long idProd, String nomeProd, double valorProd, int estoqueProd, boolean statusProd,
-            String descricaoProd, String imgbase64Prod, Categoria categoria) {
-        this.idProd = idProd;
-        this.nomeProd = nomeProd;
-        this.valorProd = valorProd;
-        this.estoqueProd = estoqueProd;
-        this.statusProd = statusProd;
-        this.descricaoProd = descricaoProd;
-        this.imgbase64Prod = imgbase64Prod;
-        this.categoria = categoria;
+    public Produto(ProdutoRequestDTO produtoRequest) {
+        idProd = 0l;
+        nomeProd = produtoRequest.getNomeProd();
+        valorProd = produtoRequest.getValorProd();
+        estoqueProd = produtoRequest.getEstoqueProd();
+        statusProd = produtoRequest.getStatusProd();
+        descricaoProd = produtoRequest.getDescricaoProd();
+        imgbase64Prod = produtoRequest.getImgbase64Prod();
     }
-
-
 
     public long getIdProd() {
         return idProd;

@@ -39,6 +39,8 @@ public class Pedido {
     @Column(nullable = false)
     private FormaPagamento formaPagamento;
  
+    private String observacao;
+
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     @JsonIgnore
@@ -56,19 +58,18 @@ public class Pedido {
         this.dataCompra = new Date();
     }
 
-    
-    public Pedido(long idPedido, double descontoTotal, double acrescimoTotal, double valorFinal,
-            FormaPagamento formaPagamento, Usuario usuario, List<PedidoItens> itens) {
+    public Pedido(long idPedido, double descontoTotal, double acrescimoTotal, double valorFinal, Date dataCompra,
+            FormaPagamento formaPagamento, String observacao, Usuario usuario, List<PedidoItens> itens) {
         this.idPedido = idPedido;
         this.descontoTotal = descontoTotal;
         this.acrescimoTotal = acrescimoTotal;
         this.valorFinal = valorFinal;
-        this.dataCompra = new Date();
+        this.dataCompra = dataCompra;
         this.formaPagamento = formaPagamento;
+        this.observacao = observacao;
         this.usuario = usuario;
         this.itens = itens;
     }
-
 
     public long getIdPedido() {
         return idPedido;
@@ -132,6 +133,14 @@ public class Pedido {
 
     public void setItens(List<PedidoItens> itens) {
         this.itens = itens;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     

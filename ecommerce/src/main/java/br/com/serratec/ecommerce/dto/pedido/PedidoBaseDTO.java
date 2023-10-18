@@ -4,13 +4,11 @@ import br.com.serratec.ecommerce.enums.FormaPagamento;
 
 public class PedidoBaseDTO {
     
-    // private long id;
     private double descontoTotal;
     private double acrescimoTotal;
     private double valorFinal;
-    // private Date dataCompra;
     private FormaPagamento formaPagamento;
-
+    private String observacao;
 
     public double getDescontoTotal() {
         return descontoTotal;
@@ -36,6 +34,12 @@ public class PedidoBaseDTO {
     }
     public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
+    }
+    public String getObservacao() {
+        return observacao;
+    }
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
 }

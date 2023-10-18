@@ -14,7 +14,6 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
-import br.com.serratec.ecommerce.repository.CategoriaRepository;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
 
 @Service

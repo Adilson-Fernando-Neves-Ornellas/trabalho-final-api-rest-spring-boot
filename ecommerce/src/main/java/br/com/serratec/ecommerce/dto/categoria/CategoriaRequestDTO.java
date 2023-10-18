@@ -5,10 +5,17 @@ public class CategoriaRequestDTO {
       
     private String nmCategoria;
     private String descricao;
-
+    private Boolean statusCate;
 
     public CategoriaRequestDTO (){
 
+    }
+
+    public Boolean getStatusCate() {
+        return statusCate;
+    }
+    public void setStatusCate(Boolean statusCate) {
+        this.statusCate = statusCate;
     }
     public String getNmCategoria() {
         return nmCategoria;

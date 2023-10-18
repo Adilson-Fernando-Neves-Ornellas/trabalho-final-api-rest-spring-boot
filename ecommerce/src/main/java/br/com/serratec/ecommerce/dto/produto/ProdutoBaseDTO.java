@@ -10,13 +10,7 @@ public abstract class ProdutoBaseDTO {
     private String imgbase64Prod;
     private boolean statusProd;
     
-    public boolean isStatusProd() {
-        return statusProd;
-    }
-
-    public void setStatusProd(boolean statusProd) {
-        this.statusProd = statusProd;
-    }
+   
 
     public String getNomeProd() {
         return nomeProd;
@@ -56,6 +50,14 @@ public abstract class ProdutoBaseDTO {
 
     public void setImgbase64Prod(String imgbase64Prod) {
         this.imgbase64Prod = imgbase64Prod;
+    }
+
+    public boolean getStatusProd() {
+        return statusProd;
+    }
+
+    public void setStatusProd(boolean statusProd) {
+        this.statusProd = statusProd;
     }
 
 
