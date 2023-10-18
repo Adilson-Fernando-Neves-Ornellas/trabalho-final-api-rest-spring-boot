@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,31 +21,35 @@ import br.com.serratec.ecommerce.model.email.Email;
 import br.com.serratec.ecommerce.service.EmailService;
 
 import br.com.serratec.ecommerce.service.UsuarioService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/usuarios")
-@Api(value = "USUARIOS")
+@CrossOrigin("*")
+//@Api(value = "USUARIOS")
 public class UsuarioControler {
 
     @Autowired
     private UsuarioService usuarioService;
 
+    //@Autowired
+    //private EmailService emailService;
+
     @GetMapping
-    @ApiOperation(value = "RETORNA UMA LISTA COM TODOS ")
+    //@ApiOperation(value = "RETORNA UMA LISTA COM TODOS ")
     public ResponseEntity<List<UsuarioResponseDTO>> obterTodos(){
         return ResponseEntity.ok(usuarioService.obterTodos());
     }
     
     @GetMapping("/{id}")
-    @ApiOperation(value = "RETORNA UM EXPECIFICO PELO ID ")
+    //@ApiOperation(value = "RETORNA UM EXPECIFICO PELO ID ")
     public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable long id){
         return ResponseEntity.ok(usuarioService.obterPorId(id));
     }
 
     @PostMapping
-    @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
+   // @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAdicionado = usuarioService.adcionar(usuario);
         testeEnvioDeEmail(usuario.getEmail());
@@ -55,7 +60,7 @@ public class UsuarioControler {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
+    //@ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
     public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAtualizado = usuarioService.atualizar(id, usuario);
 
@@ -66,7 +71,7 @@ public class UsuarioControler {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
+    //@ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
     public ResponseEntity<?> deletar(@PathVariable long id){
         usuarioService.deletar(id);
 
@@ -81,7 +86,7 @@ public class UsuarioControler {
     private EmailService emailServiceAction;
 
     @PostMapping("/email")
-    @ApiOperation(value = "MANDA UM EMAIL TESTE")
+    //@ApiOperation(value = "MANDA UM EMAIL TESTE")
     public ResponseEntity<?> testeEnvioDeEmail(String emailTeste ){
 
         List<String> destinatarios = new ArrayList<>();
@@ -96,4 +101,6 @@ public class UsuarioControler {
 
         return ResponseEntity.status(200).body("E-mail enviado com sucesso!!!");
     }
+
+    
 }

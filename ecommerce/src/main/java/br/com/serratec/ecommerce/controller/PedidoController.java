@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
-import br.com.serratec.ecommerce.model.Pedido;
+
 import br.com.serratec.ecommerce.service.PedidoService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/pedidos")
-@Api(value = "PEDIDOS")
 public class PedidoController {
     
     @Autowired
@@ -33,13 +30,11 @@ public class PedidoController {
     }
 
     @GetMapping
-    @ApiOperation(value = "RETORNA UMA LISTA COM TODOS")
     public ResponseEntity<List<PedidoResponseDTO>> obterTodos() {
         return ResponseEntity.ok(pedidoService.obterTodos());
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "RETORNA UM EXPECIFICO PELO ID ")
     public ResponseEntity<PedidoResponseDTO> obterPorId(@PathVariable Long id) {
         return ResponseEntity.ok(pedidoService.obterPorId(id));
     } 
@@ -55,13 +50,13 @@ public class PedidoController {
     // }
 
     @PostMapping
-    @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
+    //@ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
         return pedidoService.savePedido(pedido);
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
+    //@ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
     public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id, @RequestBody PedidoRequestDTO pedidoRequest) {
         PedidoResponseDTO pedidoAtualizado = pedidoService.atualizar(id, pedidoRequest);
 
@@ -71,7 +66,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
+    //@ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
     public ResponseEntity<?> deletar(@PathVariable long id) {
         pedidoService.deletar(id);
 

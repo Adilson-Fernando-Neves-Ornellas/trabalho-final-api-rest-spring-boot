@@ -1,8 +1,5 @@
 package br.com.serratec.ecommerce.dto.categoria;
 
-import javax.persistence.Column;
-
-import br.com.serratec.ecommerce.model.Categoria;
 
 public class CategoriaRequestDTO {
       

@@ -15,12 +15,9 @@ import org.springframework.stereotype.Service;
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
 import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensRequestDTO;
-import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensResponseDTO;
-import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.PedidoItens;
-import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
 
@@ -57,15 +54,15 @@ public class PedidoService {
         return mapper.map(optPedido.get(), PedidoResponseDTO.class);
     }
 
-    // @Transactional
-    // public PedidoResponseDTO adicionar(PedidoRequestDTO pedidoRequest) {
+    @Transactional
+    public PedidoResponseDTO adicionar(PedidoRequestDTO pedidoRequest) {
            
-    //     Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
-    //     pedidoModel.setIdPedido(0);
-    //     pedidoModel = pedidoRepository.save(pedidoModel);
+        Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
+        pedidoModel.setIdPedido(0);
+        pedidoModel = pedidoRepository.save(pedidoModel);
 
-    //     return mapper.map(pedidoModel, PedidoResponseDTO.class);
-    // }
+        return mapper.map(pedidoModel, PedidoResponseDTO.class);
+    }
 
     public PedidoResponseDTO savePedido(PedidoRequestDTO pedido) {
         // Antes de salvar o pedido, associe os itens ao pedido
