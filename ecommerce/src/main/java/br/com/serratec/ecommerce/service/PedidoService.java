@@ -1,7 +1,5 @@
 package br.com.serratec.ecommerce.service;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -14,11 +12,10 @@ import org.springframework.stereotype.Service;
 
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
-import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensRequestDTO;
-import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
+import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
+import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.PedidoItens;
-import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
 
 @Service
@@ -28,10 +25,7 @@ public class PedidoService {
     private PedidoRespository pedidoRepository;
 
     @Autowired
-    private PedidoItensService pedidoItensService;
-
-    @Autowired
-    private UsuarioService usuarioService;
+    private ProdutoService produtoService;
 
     @Autowired
     public ModelMapper mapper;
@@ -64,13 +58,17 @@ public class PedidoService {
         return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
 
+    @Transactional
     public PedidoResponseDTO savePedido(PedidoRequestDTO pedido) {
         // Antes de salvar o pedido, associe os itens ao pedido
         Pedido pedidoModel = mapper.map(pedido, Pedido.class);
 
         for (PedidoItens item : pedidoModel.getItens()) {
+            item = adicionarValorTotalItem(item);
             item.setPedido(pedidoModel);
         }
+
+        pedidoModel = adicionarValorFinal(pedidoModel);
         
         pedidoModel = pedidoRepository.save(pedidoModel);
         return mapper.map(pedidoModel, PedidoResponseDTO.class);
@@ -90,7 +88,7 @@ public class PedidoService {
         obterPorId(id);
         pedidoRepository.deleteById(id);
     }
- 
+ /* 
     private Pedido adicionarPedido(PedidoRequestDTO pedidoRequest) {
 
         Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
@@ -120,5 +118,31 @@ public class PedidoService {
 
         return adicionados;
     }
+ */
 
+    private PedidoItens adicionarValorTotalItem(PedidoItens item) {
+        long idProd = item.getProduto().getIdProd();
+        ProdutoResponseDTO produtoResponse = produtoService.obterPorId(idProd);
+
+        item.setValorTotal((produtoResponse.getValorProd() * ((item.getAcresProduto() / 100 + 1) - (item.getDescProduto() / 100))) * item.getQuantidade());
+
+        produtoResponse.setEstoqueProd(produtoResponse.getEstoqueProd() - item.getQuantidade());
+
+        produtoService.atualizar(idProd, mapper.map(produtoResponse, ProdutoRequestDTO.class));
+
+        return item;
+    }
+
+    private Pedido adicionarValorFinal(Pedido pedido) {
+
+        double valorTotal = 0;
+
+        for(PedidoItens item : pedido.getItens()) {
+            valorTotal += item.getValorTotal();
+        }
+
+        pedido.setValorFinal(valorTotal * ((pedido.getAcrescimoTotal() / 100 + 1) - (pedido.getDescontoTotal() / 100)));
+
+        return pedido;
+    }
 }

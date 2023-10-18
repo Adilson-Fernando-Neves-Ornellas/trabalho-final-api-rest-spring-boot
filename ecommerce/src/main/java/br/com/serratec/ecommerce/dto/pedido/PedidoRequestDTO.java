@@ -2,13 +2,13 @@ package br.com.serratec.ecommerce.dto.pedido;
 
 import java.util.List;
 
-import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensRequestDTO;
+import br.com.serratec.ecommerce.model.PedidoItens;
 
 public class PedidoRequestDTO extends PedidoBaseDTO{
     
     private long id;
     private long idUsuario;
-    private List<PedidoItensRequestDTO> pedidoItensRequest;
+    private List<PedidoItens> pedidoItens;
 
     public long getId() {
         return id;
@@ -16,12 +16,12 @@ public class PedidoRequestDTO extends PedidoBaseDTO{
     public void setId(long id) {
         this.id = id;
     }
-    public List<PedidoItensRequestDTO> getPedidoItens() {
-        return pedidoItensRequest;
+    public List<PedidoItens> getPedidoItens() {
+        return pedidoItens;
     }
 
-    public void setPedidoItens(List<PedidoItensRequestDTO> pedidoItensRequest) {
-        this.pedidoItensRequest = pedidoItensRequest;
+    public void setPedidoItens(List<PedidoItens> pedidoItens) {
+        this.pedidoItens = pedidoItens;
     }
 
     public long getIdUsuario() {

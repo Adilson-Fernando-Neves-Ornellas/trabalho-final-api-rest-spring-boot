@@ -26,6 +26,18 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:8080/usuarios/login
+Content-Type: application/json
+
+{
+    "email": "ornellas00@hotmail.com",
+    "senha": "12345687"
+}
+
+###
+
+i'm having lunch rn teache
 POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 

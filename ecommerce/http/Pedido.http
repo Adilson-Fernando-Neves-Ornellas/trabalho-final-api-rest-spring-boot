@@ -8,9 +8,8 @@ POST http://localhost:8080/pedidos
 Content-Type: application/json
 
 {
-    "descontoTotal": 0,
+    "descontoTotal": 5,
     "acrescimoTotal": 0,
-    "valorFinal": 0,
     "formaPagamento": "PIX",
     "idUsuario": 1,
     "pedidoItens": [
@@ -20,7 +19,15 @@ Content-Type: application/json
             },
             "descProduto": 0,
             "acresProduto": 0,
-            "quantidade": 2
+            "quantidade": 5
+        },
+        {
+            "produto": {
+                "idProd": 2
+            },
+            "descProduto": 0,
+            "acresProduto": 5,
+            "quantidade": 3
         }
     ]
 }

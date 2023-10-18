@@ -1,7 +1,5 @@
 package br.com.serratec.ecommerce.dto.pedido;
 
-import java.util.Date;
-
 import br.com.serratec.ecommerce.enums.FormaPagamento;
 
 public class PedidoBaseDTO {
