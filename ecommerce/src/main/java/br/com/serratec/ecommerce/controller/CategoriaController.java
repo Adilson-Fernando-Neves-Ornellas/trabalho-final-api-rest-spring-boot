@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/categorias")
 //@Api(value = "CATEGORIAS")
 public class CategoriaController {
 
