@@ -6,9 +6,16 @@ import br.com.serratec.ecommerce.dto.pedidoItens.PedidoItensRequestDTO;
 
 public class PedidoRequestDTO extends PedidoBaseDTO{
     
+    private long id;
     private long idUsuario;
     private List<PedidoItensRequestDTO> pedidoItensRequest;
 
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
     public List<PedidoItensRequestDTO> getPedidoItens() {
         return pedidoItensRequest;
     }

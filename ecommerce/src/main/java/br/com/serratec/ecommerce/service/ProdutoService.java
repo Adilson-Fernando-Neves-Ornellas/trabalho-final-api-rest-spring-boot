@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.serratec.ecommerce.dto.categoria.CategoriaRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
+import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.Produto;
+import br.com.serratec.ecommerce.repository.CategoriaRepository;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
 
 @Service
@@ -19,6 +22,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepositoryAction;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -42,10 +48,16 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoResponseDTO adcionar(ProdutoRequestDTO produtoRequest) {
+        
+        CategoriaRequestDTO categoriaRequest = produtoRequest.getCategoria();
+        Categoria categoria = modelMapper.map(categoriaRequest, Categoria.class);
+
+        categoriaRepository.save(categoria);
 
         Produto produto = modelMapper.map(produtoRequest, Produto.class);
         produto.setIdProd(0l);
-
+        produto.setCategoria(categoria);
+        
         produto = produtoRepositoryAction.save(produto);
 
         return modelMapper.map(produto, ProdutoResponseDTO.class);

@@ -55,7 +55,8 @@ public class PedidoController {
     // }
 
     @PostMapping
-    public Pedido savePedido(@RequestBody Pedido pedido) {
+    @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
+    public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
         return pedidoService.savePedido(pedido);
     }
 

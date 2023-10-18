@@ -1,32 +1,35 @@
 package br.com.serratec.ecommerce.dto.produto;
 
+import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
+import br.com.serratec.ecommerce.model.Categoria;
+
 public abstract class ProdutoBaseDTO {
 
-    private long idProd;
+    // private long idProd;
     private String nomeProd;
     private double valorProd;
     private int estoqueProd;
     private String descricaoProd;
     private String imgbase64Prod;
-    private String nomeFile;
-    private String pathFile;
-    private Long idPedidoItens;// remover depois
 
-    public Long getIdPedidoItens() {
-        return idPedidoItens;
-    }
+    // private Long idPedidoItens;// remover depois
 
-    public void setIdPedidoItens(Long idPedidoItens) {
-        this.idPedidoItens = idPedidoItens;
-    }
+    // public Long getIdPedidoItens() {
+    //     return idPedidoItens;
+    // }
 
-    public long getId() {
-        return idProd;
-    }
+    // public void setIdPedidoItens(Long idPedidoItens) {
+    //     this.idPedidoItens = idPedidoItens;
+    // }
 
-    public void setId(long idProd) {
-        this.idProd = idProd;
-    }
+    // public long getId() {
+    //     return idProd;
+    // }
+
+    // public void setId(long idProd) {
+    //     this.idProd = idProd;
+    // }
+
 
     public String getNomeProd() {
         return nomeProd;
@@ -68,20 +71,5 @@ public abstract class ProdutoBaseDTO {
         this.imgbase64Prod = imgbase64Prod;
     }
 
-    public String getNomeFile() {
-        return nomeFile;
-    }
-
-    public void setNomeFile(String nomeFile) {
-        this.nomeFile = nomeFile;
-    }
-
-    public String getPathFile() {
-        return pathFile;
-    }
-
-    public void setPathFile(String pathFile) {
-        this.pathFile = pathFile;
-    }
 
 }

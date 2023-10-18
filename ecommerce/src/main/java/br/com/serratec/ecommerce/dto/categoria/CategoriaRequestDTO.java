@@ -7,8 +7,6 @@ import br.com.serratec.ecommerce.model.Categoria;
 public class CategoriaRequestDTO {
       
     private String nmCategoria;
-
-    
     private String descricao;
 
 

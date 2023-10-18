@@ -67,12 +67,16 @@ public class PedidoService {
     //     return mapper.map(pedidoModel, PedidoResponseDTO.class);
     // }
 
-    public Pedido savePedido(Pedido pedido) {
+    public PedidoResponseDTO savePedido(PedidoRequestDTO pedido) {
         // Antes de salvar o pedido, associe os itens ao pedido
-        for (PedidoItens item : pedido.getItens()) {
-            item.setPedido(pedido);
+        Pedido pedidoModel = mapper.map(pedido, Pedido.class);
+
+        for (PedidoItens item : pedidoModel.getItens()) {
+            item.setPedido(pedidoModel);
         }
-        return pedidoRepository.save(pedido);
+        
+        pedidoModel = pedidoRepository.save(pedidoModel);
+        return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
 
     public PedidoResponseDTO atualizar(long id, PedidoRequestDTO pedidoRequest) {

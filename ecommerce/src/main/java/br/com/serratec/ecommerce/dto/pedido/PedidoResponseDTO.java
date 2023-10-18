@@ -2,24 +2,35 @@ package br.com.serratec.ecommerce.dto.pedido;
 
 import java.util.List;
 
+import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.model.PedidoItens;
 import br.com.serratec.ecommerce.model.Usuario;
 
 public class PedidoResponseDTO {
     
-    private Usuario usuario;
-    private List<PedidoItens> pedidoItens;
+    private Long id;
+    private UsuarioResponseDTO usuario;
 
-    public Usuario getUsuario() {
+    
+    public UsuarioResponseDTO getUsuario() {
         return usuario;
     }
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(UsuarioResponseDTO usuario) {
         this.usuario = usuario;
     }
-    public List<PedidoItens> getPedidoItens() {
+    private List<PedidoResponseDTO> pedidoItens;
+
+    public List<PedidoResponseDTO> getPedidoItens() {
         return pedidoItens;
     }
-    public void setPedidoItens(List<PedidoItens> pedidoItens) {
+    public void setPedidoItens(List<PedidoResponseDTO> pedidoItens) {
         this.pedidoItens = pedidoItens;
     }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

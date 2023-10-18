@@ -75,30 +75,25 @@ public class ProdutoController {
                 .build();
     }
 
+
+
     // -----------------------------------------------------------------------------------
 
-    // Define uma constante UPLOAD_DIRECTORY que armazena o diretório de upload como
-    // o diretório atual do sistema + "/Uploads"
-    public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/Uploads";
+    // public static String UPLOAD_DIRECTORY = System.getProperty("user.dir") + "/Uploads";
 
-    @PostMapping("/upload/{id}")
-    @ApiOperation(value = "UPLOAD DE ARQUIVO EM UM PRODUTO EXPECIFICO")
-    public void uploadImage(@RequestParam("image") MultipartFile file, @PathVariable long id) throws IOException {
+    // @PostMapping("/upload/{id}")
+    // @ApiOperation(value = "UPLOAD DE ARQUIVO EM UM PRODUTO EXPECIFICO")
+    // public void uploadImage(@RequestParam("image") MultipartFile file, @PathVariable long id) throws IOException {
 
-        // Define o caminho completo (Path) para o arquivo a ser salvo, com base no
-        // diretório de upload e no nome de arquivo original
-        Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
-        Files.write(fileNameAndPath, file.getBytes());
+    //     Path fileNameAndPath = Paths.get(UPLOAD_DIRECTORY, file.getOriginalFilename());
+    //     Files.write(fileNameAndPath, file.getBytes());
 
-        // Obtém um produto do mercado com base no ID fornecido
-        ProdutoResponseDTO prdutoEncontrado = produtoServiceAction.obterPorId(id);
-        // Define o nome do arquivo no produto com base no nome original do arquivo
-        prdutoEncontrado.setNomeFile(file.getOriginalFilename());
-        // Define o caminho do arquivo no produto com base no diretório de upload e no
-        // nome do arquivo
-        prdutoEncontrado.setPathFile(UPLOAD_DIRECTORY + "/" + prdutoEncontrado.getNomeFile());
-        // Atualiza o produto no serviço do mercado
-        // produtoServiceAction.atualizar(id, prdutoEncontrado); obs tem que verificar o
-        // pq não está funcionando com o DTO?
-    }
+    //     ProdutoResponseDTO prdutoEncontrado = produtoServiceAction.obterPorId(id);
+
+    //     prdutoEncontrado.setNomeFile(file.getOriginalFilename());
+
+    //     prdutoEncontrado.setPathFile(UPLOAD_DIRECTORY + "/" + prdutoEncontrado.getNomeFile());
+
+    //     produtoServiceAction.atualizar(id, prdutoEncontrado);
+    // }
 }
