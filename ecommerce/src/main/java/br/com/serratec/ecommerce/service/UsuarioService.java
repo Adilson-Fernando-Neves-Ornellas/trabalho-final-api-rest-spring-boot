@@ -22,6 +22,7 @@ import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.model.Usuario;
+import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.UsuarioRepository;
 import br.com.serratec.ecommerce.security.JWTService;
 
@@ -61,7 +62,7 @@ public class UsuarioService  {
         Optional<Usuario> optUsuario = usuarioRepository.findById(id);
 
         if(optUsuario.isEmpty()){
-            throw new RuntimeException("Nenhum registro encontardo para o id: "+ id);
+            throw new ResourceNotFoundException("Nenhum registro encontardo para o id: "+ id);
         }
         return modelMapper.map(optUsuario.get(), UsuarioResponseDTO.class);
     }

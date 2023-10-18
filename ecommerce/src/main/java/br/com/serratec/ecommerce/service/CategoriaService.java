@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import br.com.serratec.ecommerce.dto.categoria.CategoriaRequestDTO;
 import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
 import br.com.serratec.ecommerce.model.Categoria;
+import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.CategoriaRepository;
 
 @Service
@@ -49,7 +50,7 @@ public class CategoriaService {
     public CategoriaResponseDTO atualizar(long id, CategoriaRequestDTO categoriaDTO) {
 
         Categoria categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Nenhum registro encontardo para o id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontardo para o id: " + id));
 
         categoria.setDescricao(categoriaDTO.getDescricao());
         categoria.setNmCategoria(categoriaDTO.getNmCategoria());

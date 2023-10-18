@@ -1,6 +1,5 @@
 package br.com.serratec.ecommerce.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Produto {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idProduto")
@@ -31,7 +29,6 @@ public class Produto {
     @Column(nullable = false)
     private boolean statusProd;
 
-    @Column(nullable = false)
     private String descricaoProd;
 
     private String imgbase64Prod;
@@ -40,16 +37,9 @@ public class Produto {
     @JoinColumn(name = "idCategoria")
     private Categoria categoria;
 
-    // private String nomeFile;
-
-    // private String pathFile;
-    
-
-
-
     public Produto() {
     }
-    
+
     public Produto(long idProd, String nomeProd, double valorProd, int estoqueProd, boolean statusProd,
             String descricaoProd, String imgbase64Prod) {
         this.idProd = idProd;
@@ -125,19 +115,15 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    // public String getNomeFile() {
-    //     return nomeFile;
-    // }
+    public void validarEstoque() {
+        if (estoqueProd <= 0 || nomeProd.equals("")) {
+            throw new ResourceBadRequestException("Nome do produto e quantidade obrigatórios");
+        }
+    }
 
-    // public void setNomeFile(String nomeFile) {
-    //     this.nomeFile = nomeFile;
-    // }
-    
-    // public String getPathFile() {
-    //     return pathFile;
-    // }
-
-    // public void setPathFile(String pathFile) {
-    //     this.pathFile = pathFile;
-    // }
+    public void validarValorStatus() {
+        if (!statusProd || valorProd < 0) {
+            throw new ResourceBadRequestException("O Status ou Valor do Produto é inválido!");
+        }
+    }
 }

@@ -14,6 +14,7 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.Produto;
+import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.CategoriaRepository;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
 
@@ -41,14 +42,14 @@ public class ProdutoService {
         Optional<Produto> optProduto = produtoRepositoryAction.findById(id);
 
         if (optProduto.isEmpty()) {
-            throw new RuntimeException("Nenhum registro encontardo para o id: " + id);
+            throw new ResourceNotFoundException("Nenhum registro encontardo para o id: " + id);
         }
         return modelMapper.map(optProduto.get(), ProdutoResponseDTO.class);
     }
 
     @Transactional
     public ProdutoResponseDTO adcionar(ProdutoRequestDTO produtoRequest) {
-        
+    
         CategoriaRequestDTO categoriaRequest = produtoRequest.getCategoria();
         Categoria categoria = modelMapper.map(categoriaRequest, Categoria.class);
 
@@ -57,6 +58,9 @@ public class ProdutoService {
         Produto produto = modelMapper.map(produtoRequest, Produto.class);
         produto.setIdProd(0l);
         produto.setCategoria(categoria);
+        
+        produto.validarEstoque();
+        produto.validarValorStatus();
         
         produto = produtoRepositoryAction.save(produto);
 
