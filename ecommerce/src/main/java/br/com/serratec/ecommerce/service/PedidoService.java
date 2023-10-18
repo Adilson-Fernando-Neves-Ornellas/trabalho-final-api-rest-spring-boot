@@ -54,15 +54,6 @@ public class PedidoService {
         return mapper.map(optPedido.get(), PedidoResponseDTO.class);
     }
 
-    @Transactional
-    public PedidoResponseDTO adicionar(PedidoRequestDTO pedidoRequest) {
-           
-        Pedido pedidoModel = mapper.map(pedidoRequest, Pedido.class);
-        pedidoModel.setIdPedido(0);
-        pedidoModel = pedidoRepository.save(pedidoModel);
-
-        return mapper.map(pedidoModel, PedidoResponseDTO.class);
-    }
 
     public PedidoResponseDTO savePedido(PedidoRequestDTO pedido) {
         // Antes de salvar o pedido, associe os itens ao pedido

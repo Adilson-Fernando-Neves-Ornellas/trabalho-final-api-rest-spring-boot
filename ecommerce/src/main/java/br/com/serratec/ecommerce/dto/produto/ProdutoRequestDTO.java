@@ -1,26 +1,26 @@
 package br.com.serratec.ecommerce.dto.produto;
 
-import br.com.serratec.ecommerce.dto.categoria.CategoriaRequestDTO;
-
 public class ProdutoRequestDTO extends ProdutoBaseDTO {
 
-    private boolean statusProd;
-    private CategoriaRequestDTO categoria;
+    private long id;
+    private long idCategoria;
 
-    public CategoriaRequestDTO getCategoria() {
-        return categoria;
+
+    public long getIdProd() {
+        return id;
     }
 
-    public void setCategoria(CategoriaRequestDTO categoria) {
-        this.categoria = categoria;
+    public void setIdProd(long idProd) {
+        this.id = idProd;
     }
 
-    public boolean isStatusProd() {
-        return statusProd;
+    public long getIdCateforia() {
+        return idCategoria;
     }
 
-    public void setStatusProd(boolean statusProd) {
-        this.statusProd = statusProd;
+    public void setIdCateforia(long idCateforia) {
+        this.idCategoria = idCateforia;
     }
+    
 
 }

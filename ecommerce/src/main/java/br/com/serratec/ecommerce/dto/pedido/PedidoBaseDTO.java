@@ -1,6 +1,5 @@
 package br.com.serratec.ecommerce.dto.pedido;
 
-import java.util.Date;
 
 import br.com.serratec.ecommerce.enums.FormaPagamento;
 
@@ -13,12 +12,7 @@ public class PedidoBaseDTO {
     // private Date dataCompra;
     private FormaPagamento formaPagamento;
 
-    // public long getId() {
-    //     return id;
-    // }
-    // public void setId(long id) {
-    //     this.id = id;
-    // }
+
     public double getDescontoTotal() {
         return descontoTotal;
     }
@@ -37,12 +31,7 @@ public class PedidoBaseDTO {
     public void setValorFinal(double valorFinal) {
         this.valorFinal = valorFinal;
     }
-    // public Date getDataCompra() {
-    //     return dataCompra;
-    // }
-    // public void setDataCompra() {
-    //     this.dataCompra = new Date();
-    // }
+
     public FormaPagamento getFormaPagamento() {
         return formaPagamento;
     }

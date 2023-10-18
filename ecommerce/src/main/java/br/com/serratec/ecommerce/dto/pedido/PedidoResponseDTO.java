@@ -3,8 +3,7 @@ package br.com.serratec.ecommerce.dto.pedido;
 import java.util.List;
 
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
-import br.com.serratec.ecommerce.model.PedidoItens;
-import br.com.serratec.ecommerce.model.Usuario;
+
 
 public class PedidoResponseDTO {
     

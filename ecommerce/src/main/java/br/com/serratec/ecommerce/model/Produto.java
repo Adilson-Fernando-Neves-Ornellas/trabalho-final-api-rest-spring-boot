@@ -1,6 +1,5 @@
 package br.com.serratec.ecommerce.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,9 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Produto {
     
@@ -40,18 +37,11 @@ public class Produto {
     @JoinColumn(name = "idCategoria")
     private Categoria categoria;
 
-    // private String nomeFile;
-
-    // private String pathFile;
-    
-
-
-
     public Produto() {
     }
-    
+
     public Produto(long idProd, String nomeProd, double valorProd, int estoqueProd, boolean statusProd,
-            String descricaoProd, String imgbase64Prod) {
+            String descricaoProd, String imgbase64Prod, Categoria categoria) {
         this.idProd = idProd;
         this.nomeProd = nomeProd;
         this.valorProd = valorProd;
@@ -59,7 +49,10 @@ public class Produto {
         this.statusProd = statusProd;
         this.descricaoProd = descricaoProd;
         this.imgbase64Prod = imgbase64Prod;
+        this.categoria = categoria;
     }
+
+
 
     public long getIdProd() {
         return idProd;
@@ -125,19 +118,4 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    // public String getNomeFile() {
-    //     return nomeFile;
-    // }
-
-    // public void setNomeFile(String nomeFile) {
-    //     this.nomeFile = nomeFile;
-    // }
-    
-    // public String getPathFile() {
-    //     return pathFile;
-    // }
-
-    // public void setPathFile(String pathFile) {
-    //     this.pathFile = pathFile;
-    // }
 }

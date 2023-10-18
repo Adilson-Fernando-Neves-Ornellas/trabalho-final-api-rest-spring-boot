@@ -63,8 +63,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
              * aqui vamos informar
              */
 
-             .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login","/swagger-ui/index.html#")
+             .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login")
              .permitAll() // informo que todos podem acessar esses endpontis sem autorisacao
+             .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/index.html").permitAll()
              .anyRequest()
              //.permitAll();
              .authenticated();//digo que qualquer outro endpont nao mapeado acima deve cobrar autenticacao

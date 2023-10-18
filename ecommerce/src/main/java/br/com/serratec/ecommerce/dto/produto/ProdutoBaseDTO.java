@@ -1,8 +1,5 @@
 package br.com.serratec.ecommerce.dto.produto;
 
-import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
-import br.com.serratec.ecommerce.model.Categoria;
-
 public abstract class ProdutoBaseDTO {
 
     // private long idProd;
@@ -11,25 +8,15 @@ public abstract class ProdutoBaseDTO {
     private int estoqueProd;
     private String descricaoProd;
     private String imgbase64Prod;
+    private boolean statusProd;
+    
+    public boolean isStatusProd() {
+        return statusProd;
+    }
 
-    // private Long idPedidoItens;// remover depois
-
-    // public Long getIdPedidoItens() {
-    //     return idPedidoItens;
-    // }
-
-    // public void setIdPedidoItens(Long idPedidoItens) {
-    //     this.idPedidoItens = idPedidoItens;
-    // }
-
-    // public long getId() {
-    //     return idProd;
-    // }
-
-    // public void setId(long idProd) {
-    //     this.idProd = idProd;
-    // }
-
+    public void setStatusProd(boolean statusProd) {
+        this.statusProd = statusProd;
+    }
 
     public String getNomeProd() {
         return nomeProd;

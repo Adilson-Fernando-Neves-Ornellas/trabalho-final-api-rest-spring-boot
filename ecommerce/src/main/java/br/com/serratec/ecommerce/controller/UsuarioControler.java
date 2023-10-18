@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginRequestDTO;
+import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.model.email.Email;
@@ -102,5 +104,13 @@ public class UsuarioControler {
         return ResponseEntity.status(200).body("E-mail enviado com sucesso!!!");
     }
 
-    
+     @PostMapping("/login")
+    public ResponseEntity<UsuarioLoginResponseDTO> logar(@RequestBody UsuarioLoginRequestDTO usuariologinRequest){
+        
+        UsuarioLoginResponseDTO usuarioLogado = usuarioService.logar(usuariologinRequest.getEmail(), usuariologinRequest.getSenha());
+        
+        return ResponseEntity
+            .status(200)
+            .body(usuarioLogado);
+    }
 }
