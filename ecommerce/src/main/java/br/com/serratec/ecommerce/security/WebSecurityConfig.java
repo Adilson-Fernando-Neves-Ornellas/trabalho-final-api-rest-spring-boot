@@ -63,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
              * aqui vamos informar
              */
 
-             .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login","/swagger-ui/index.html#")
+            .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login","/swagger-ui/index.html#", "/pedidos")
              .permitAll() // informo que todos podem acessar esses endpontis sem autorisacao
              .anyRequest()
              //.permitAll();
