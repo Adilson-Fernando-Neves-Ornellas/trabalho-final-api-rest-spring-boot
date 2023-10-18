@@ -7,7 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
+
 
 @Entity
 public class Produto {
@@ -41,7 +43,7 @@ public class Produto {
     }
 
     public Produto(long idProd, String nomeProd, double valorProd, int estoqueProd, boolean statusProd,
-            String descricaoProd, String imgbase64Prod) {
+            String descricaoProd, String imgbase64Prod, Categoria categoria) {
         this.idProd = idProd;
         this.nomeProd = nomeProd;
         this.valorProd = valorProd;
@@ -49,7 +51,10 @@ public class Produto {
         this.statusProd = statusProd;
         this.descricaoProd = descricaoProd;
         this.imgbase64Prod = imgbase64Prod;
+        this.categoria = categoria;
     }
+
+
 
     public long getIdProd() {
         return idProd;
@@ -126,4 +131,5 @@ public class Produto {
             throw new ResourceBadRequestException("O Status ou Valor do Produto é inválido!");
         }
     }
+
 }

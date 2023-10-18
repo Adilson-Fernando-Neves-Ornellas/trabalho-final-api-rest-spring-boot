@@ -50,16 +50,6 @@ public class UsuarioControler {
         return ResponseEntity.ok(usuarioService.obterPorId(id));
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<UsuarioLoginResponseDTO> logar(@RequestBody UsuarioLoginRequestDTO usuariologinRequest){
-        
-        UsuarioLoginResponseDTO usuarioLogado = usuarioService.logar(usuariologinRequest.getEmail(), usuariologinRequest.getSenha());
-        
-        return ResponseEntity
-            .status(200)
-            .body(usuarioLogado);
-    }
-
     @PostMapping
    // @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
@@ -116,5 +106,13 @@ public class UsuarioControler {
         return ResponseEntity.status(200).body("E-mail enviado com sucesso!!!");
     }
 
-    
+     @PostMapping("/login")
+    public ResponseEntity<UsuarioLoginResponseDTO> logar(@RequestBody UsuarioLoginRequestDTO usuariologinRequest){
+        
+        UsuarioLoginResponseDTO usuarioLogado = usuarioService.logar(usuariologinRequest.getEmail(), usuariologinRequest.getSenha());
+        
+        return ResponseEntity
+            .status(200)
+            .body(usuarioLogado);
+    }
 }
