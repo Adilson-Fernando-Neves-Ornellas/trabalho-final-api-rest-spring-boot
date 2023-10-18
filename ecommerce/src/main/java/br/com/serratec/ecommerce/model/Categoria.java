@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
+
 
 @Entity
 public class Categoria {
@@ -61,5 +63,9 @@ public class Categoria {
     public void setProdutos(List<Produto> produtos) {
         this.produtos = produtos;
     }
-
+    public void validarNome() {
+        if (nmCategoria.equals("") || descricao.equals("")) {
+            throw new ResourceBadRequestException("Nome da categoria e descrição obrigatórios");
+        }
+    }
 }
