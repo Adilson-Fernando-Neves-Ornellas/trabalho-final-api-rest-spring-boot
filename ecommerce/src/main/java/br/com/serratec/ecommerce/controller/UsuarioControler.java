@@ -64,7 +64,7 @@ public class UsuarioControler {
    // @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAdicionado = usuarioService.adcionar(usuario);
-        testeEnvioDeEmail(usuario.getEmail());
+        testeEnvioDeEmail("Cliente Adicionado", usuario.getEmail(), "Cliente " + usuario.getNmUsuario() + " adicionado com Sucesso");
 
         return ResponseEntity
             .status(201)
@@ -101,15 +101,15 @@ public class UsuarioControler {
 
     @PostMapping("/email")
     //@ApiOperation(value = "MANDA UM EMAIL TESTE")
-    public ResponseEntity<?> testeEnvioDeEmail(String emailTeste ){
+    public ResponseEntity<?> testeEnvioDeEmail(String assunto, String emailDestinatario, String mensagem ){
 
         List<String> destinatarios = new ArrayList<>();
-        destinatarios.add(emailTeste);
+        destinatarios.add(emailDestinatario);
 
 
-        String mensagem = "<h1 style=\"text-align: center;\">EMAIL TESTE TRABALHO API GRUPO 01</h1>";
+        // String mensagem = "<h1 style=\"text-align: center;\">EMAIL TESTE TRABALHO API GRUPO 01</h1>";
 
-        Email email = new Email("Teste de email trabalho API Grupo 01", mensagem, "adilson.ornellas@aluno.senai.br", destinatarios);
+        Email email = new Email(assunto, mensagem, "adilson.ornellas@aluno.senai.br", destinatarios);
 
         emailServiceAction.enviar(email);
 
