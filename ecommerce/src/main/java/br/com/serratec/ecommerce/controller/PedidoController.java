@@ -40,8 +40,13 @@ public class PedidoController {
     } 
 
     @PostMapping
-    public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
-        return pedidoService.savePedido(pedido);
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {
+        PedidoResponseDTO pedidoadicionado = pedidoService.savePedido(pedido);
+
+        return ResponseEntity
+                .status(201)
+                .body(pedidoadicionado);
     }
 
     @PutMapping("/{id}")
