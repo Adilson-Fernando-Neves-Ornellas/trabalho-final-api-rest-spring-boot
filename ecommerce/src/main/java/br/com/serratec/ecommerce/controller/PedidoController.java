@@ -54,10 +54,6 @@ public class PedidoController {
     } 
 
     @PostMapping
-<<<<<<< HEAD
-=======
-
->>>>>>> 56899e7046e335ff92c8610f95379241c9d095ab
     public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
         
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedido.getIdUsuario());
