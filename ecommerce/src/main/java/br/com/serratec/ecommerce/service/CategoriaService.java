@@ -65,14 +65,17 @@ public class CategoriaService {
 
         // acha o categoriaResponse por Id e salva a Auditoria dele.
         var catBanco = obterPorId(id);
-        auditoriaService.infoRegistarAuditoria(TipoEntidade.CATEGORIA, "Atualizar", catBanco , categoria);
+        auditoriaService.infoRegistarAuditoria(TipoEntidade.CATEGORIA, "Atualizado", catBanco , categoria);
 
         return modelMapper.map(categoria, CategoriaResponseDTO.class);
 
     }
 
     public void deletar(Long id) {
-        obterPorId(id);
+      
+        var catBanco = obterPorId(id);
+        auditoriaService.infoRegistarAuditoria(TipoEntidade.CATEGORIA, "Deletado", catBanco , "");
+
         categoriaRepository.deleteById(id);
     }
 

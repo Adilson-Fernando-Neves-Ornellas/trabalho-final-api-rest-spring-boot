@@ -10,11 +10,11 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-    "nmUsuario": "Rorivaldo8",
-    "login": "rorivaldinho8",
+    "nmUsuario": "Rorivaldo1",
+    "login": "rorivaldinho1",
     "senha": "1234567",
-    "email": "rorivadfg8@gmail.com",
-    "telefone": "219929456298",
+    "email": "rorivadfg1@gmail.com",
+    "telefone": "219929456290",
     "perfil": "ADMIN"
 }
 ###
@@ -51,3 +51,18 @@ Content-Type: application/json
     "telefone": "219929456293",
     "perfil": "ADMIN"
 }
+###
+
+PUT http://localhost:8080/usuarios/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0Mjc3LCJleHAiOjE2OTc4MjA2Nzd9.MF2KKraqqiBv2eRpvUowocFUTnnVpFYwE6Zq4FU8y00
+Content-Type: application/json
+
+{
+    "nmUsuario": "Rorivaldo1",
+    "login": "rorivaldinho1",
+    "senha": "1234567",
+    "email": "rorivadfg1@gmail.com",
+    "telefone": "219929456290",
+    "perfil": "ADMIN"
+}
+###

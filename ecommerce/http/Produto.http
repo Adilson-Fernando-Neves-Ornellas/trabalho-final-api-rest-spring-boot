@@ -6,12 +6,13 @@ GET http://localhost:8080/produtos/1
 
 POST http://localhost:8080/produtos
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM2MTA1LCJleHAiOjE2OTc4MjI1MDV9.mt9tKfbOz3eJEFFfYJRrlfLf2pGkDoaYme8xXoDwj3w
 
 {
-  "nomeProd": "Sabonete",
-  "valorProd": 2,
-  "estoqueProd": 50,
-  "descricaoProd": "Sabonete Cheiroso",
+  "nomeProd": "Camisetex",
+  "valorProd": 50,
+  "estoqueProd": 10,
+  "descricaoProd": "Camisetex brabo",
   "imgbase64Prod": "string",
   "statusProd": true,
   "idCategoria": 1
@@ -20,9 +21,23 @@ Content-Type: application/json
 
 POST http://localhost:8080/produtos
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyLCJleHAiOjE2OTc4MjA5MDJ9.j195XssraOzXdJ-3LZi4rQ4xy0-IR7GLvuOsj_b5Ox4
 
 {
     "nomeProd": "Abobrinha",
+    "valorProd": "1700.50",
+    "estoqueProd": "10",
+    "statusProd": true,
+    "descricaoProd": "Abobrinha caríssima",
+    "idCategoria": 2
+}
+
+PUT http://localhost:8080/produtos/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyLCJleHAiOjE2OTc4MjA5MDJ9.j195XssraOzXdJ-3LZi4rQ4xy0-IR7GLvuOsj_b5Ox4
+
+{
+    "nomeProd": "AbobrinhaAlterada",
     "valorProd": "1700.50",
     "estoqueProd": "10",
     "statusProd": true,
