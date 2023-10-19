@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 
-
 @Entity
 public class Categoria {
 
@@ -29,11 +28,11 @@ public class Categoria {
     private String descricao;
 
     @Column(nullable = false)
-    private boolean statusCate; 
+    private boolean statusCate;
 
     @OneToMany(mappedBy = "categoria")
     @JsonManagedReference
-    private List<Produto> eventos;
+    private List<Produto> produtos;
 
     public long getIdCategoria() {
         return idCategoria;
@@ -73,12 +72,12 @@ public class Categoria {
         this.statusCate = statusCate;
     }
 
-    public List<Produto> getEventos() {
-        return eventos;
+    public List<Produto> getProdutos() {
+        return produtos;
     }
 
-    public void setEventos(List<Produto> eventos) {
-        this.eventos = eventos;
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
 }

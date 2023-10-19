@@ -14,12 +14,12 @@ public class ProdutoRequestDTO extends ProdutoBaseDTO {
         this.id = idProd;
     }
 
-    public long getIdCateforia() {
+    public long getIdCategoria() {
         return idCategoria;
     }
 
-    public void setIdCateforia(long idCateforia) {
-        this.idCategoria = idCateforia;
+    public void setIdCategoria(long idCategoria) {
+        this.idCategoria = idCategoria;
     }
     
 

@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
+import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.Produto;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
@@ -22,6 +22,8 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepositoryAction;
 
+    @Autowired
+    private CategoriaService categoriaService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -47,10 +49,15 @@ public class ProdutoService {
     public ProdutoResponseDTO adcionar(ProdutoRequestDTO produtoRequest) {
 
         Produto produto = modelMapper.map(produtoRequest, Produto.class);
-        
+
+        Categoria categoria = modelMapper.map(categoriaService.obterPorId(produtoRequest.getIdCategoria()),
+                Categoria.class);
+
+        produto.setCategoria(categoria);
+
         produto.validarEstoque();
         produto.validarValorStatus();
-        
+
         produto = produtoRepositoryAction.save(produto);
 
         return modelMapper.map(produto, ProdutoResponseDTO.class);
