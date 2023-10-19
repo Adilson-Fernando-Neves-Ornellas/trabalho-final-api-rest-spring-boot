@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.model.Log;
-import br.com.serratec.ecommerce.service.LogService;
+import br.com.serratec.ecommerce.service.AuditoriaService;
 
 
 // controlle log
@@ -19,7 +19,7 @@ import br.com.serratec.ecommerce.service.LogService;
 public class LogController {
     
     @Autowired
-    private LogService logService;
+    private AuditoriaService logService;
 
     @GetMapping
     public ResponseEntity<List<Long>> obterTodos() {
