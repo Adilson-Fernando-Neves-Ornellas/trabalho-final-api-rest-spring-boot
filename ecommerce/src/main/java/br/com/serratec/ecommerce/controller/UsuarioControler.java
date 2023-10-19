@@ -24,20 +24,14 @@ import br.com.serratec.ecommerce.model.email.Email;
 import br.com.serratec.ecommerce.service.EmailService;
 
 import br.com.serratec.ecommerce.service.UsuarioService;
-//import io.swagger.annotations.Api;
-//import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin("*")
-//@Api(value = "USUARIOS")
 public class UsuarioControler {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    //@Autowired
-    //private EmailService emailService;
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
