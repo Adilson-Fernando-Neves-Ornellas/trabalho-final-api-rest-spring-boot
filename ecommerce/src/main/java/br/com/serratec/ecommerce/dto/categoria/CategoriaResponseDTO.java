@@ -2,13 +2,14 @@ package br.com.serratec.ecommerce.dto.categoria;
 
 import java.util.List;
 
+import br.com.serratec.ecommerce.dto.produto.ProdutoCategoriaDTO;
 import br.com.serratec.ecommerce.model.Produto;
 
 public class CategoriaResponseDTO extends CategoriaRequestDTO{
 
     private long idCategoria;
 
-    private List<Produto> produtos;
+    private List<ProdutoCategoriaDTO> produtos;
 
 
     public CategoriaResponseDTO(){
@@ -24,11 +25,11 @@ public class CategoriaResponseDTO extends CategoriaRequestDTO{
         this.idCategoria = idCategoria;
     }
 
-    public List<Produto> getProdutos() {
+    public List<ProdutoCategoriaDTO> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(List<ProdutoCategoriaDTO> produtos) {
         this.produtos = produtos;
     }
 

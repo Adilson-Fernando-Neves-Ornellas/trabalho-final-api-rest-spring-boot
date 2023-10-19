@@ -1,17 +1,18 @@
 package br.com.serratec.ecommerce.dto.produto;
 
-import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
+import br.com.serratec.ecommerce.dto.categoria.CategoriaProdutoDTO;
+
 
 public class ProdutoResponseDTO extends ProdutoBaseDTO {
     
     private long id;
-    private CategoriaResponseDTO categoria;  
+    private CategoriaProdutoDTO categoria;  
     
     
-    public CategoriaResponseDTO getCategoria() {
+    public CategoriaProdutoDTO getCategoria() {
         return categoria;
     }
-    public void setCategoria(CategoriaResponseDTO categoria) {
+    public void setCategoria(CategoriaProdutoDTO categoria) {
         this.categoria = categoria;
     }
     public long getIdProd() {
