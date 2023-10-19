@@ -12,6 +12,7 @@ import br.com.serratec.ecommerce.dto.categoria.CategoriaRequestDTO;
 import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
 import br.com.serratec.ecommerce.enums.TipoEntidade;
 import br.com.serratec.ecommerce.model.Categoria;
+import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.CategoriaRepository;
 
@@ -50,7 +51,6 @@ public class CategoriaService {
         auditoriaService.infoRegistarAuditoria(TipoEntidade.CATEGORIA, "Cadastro", "", categoriaModel);
 
         return modelMapper.map(categoriaRepository.save(categoriaModel), CategoriaResponseDTO.class);
-
     }
 
     public CategoriaResponseDTO atualizar(long id, CategoriaRequestDTO categoriaDTO) {
@@ -58,9 +58,14 @@ public class CategoriaService {
         
         Categoria categoria = categoriaRepository.findById(id)
         .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontardo para o id: " + id));
-        
+
+        if(!categoria.getProdutos().isEmpty() && categoriaDTO.getStatusCate() == false) {
+            throw new ResourceBadRequestException("Não é possível desativar uma categoria que possua produtos vinculados a ela");
+        }
+
         categoria.setDescricao(categoriaDTO.getDescricao());
         categoria.setNmCategoria(categoriaDTO.getNmCategoria());
+        categoria.setStatusCate(categoriaDTO.getStatusCate());
         categoriaRepository.save(categoria);
 
         // acha o categoriaResponse por Id e salva a Auditoria dele.

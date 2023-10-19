@@ -29,10 +29,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyL
     "estoqueProd": "10",
     "statusProd": true,
     "descricaoProd": "Abobrinha caríssima",
-    "idCategoria": 2
+    "idCategoria": 1
 }
+###
 
-PUT http://localhost:8080/produtos/1
+PUT http://localhost:8080/produtos/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyLCJleHAiOjE2OTc4MjA5MDJ9.j195XssraOzXdJ-3LZi4rQ4xy0-IR7GLvuOsj_b5Ox4
 
@@ -41,5 +42,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyL
     "valorProd": "1700.50",
     "estoqueProd": "10",
     "statusProd": true,
-    "descricaoProd": "Abobrinha caríssima"
+    "descricaoProd": "Abobrinha caríssima",
+    "idCategoria": 1
 }

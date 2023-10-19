@@ -6,19 +6,15 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.enums.TipoEntidade;
-import br.com.serratec.ecommerce.model.Auditoria;
 import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.Produto;
-import br.com.serratec.ecommerce.model.Usuario;
+import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
 
@@ -62,6 +58,8 @@ public class ProdutoService {
         Categoria categoria = modelMapper.map(categoriaService.obterPorId(produtoRequest.getIdCategoria()),
                 Categoria.class);
 
+        verificarCategoria(categoria);
+
         produtoModel.setCategoria(categoria);
 
         produtoModel.validarEstoque();
@@ -78,6 +76,10 @@ public class ProdutoService {
     public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produtoRequest) {
         
         var prodBanco = obterPorId(id);
+
+        Categoria categoria = modelMapper.map(categoriaService.obterPorId(produtoRequest.getIdCategoria()), Categoria.class);
+
+        verificarCategoria(categoria);
 
         if(produtoRequest.getEstoqueProd() == 0) {
             produtoRequest.setStatusProd(false);
@@ -99,4 +101,9 @@ public class ProdutoService {
         produtoRepositoryAction.deleteById(id);
     }
 
+    private void verificarCategoria(Categoria categoria) {
+        if(categoria.getStatusCate() == false) {
+            throw new ResourceBadRequestException("Não é possível adicionar um produto com a categoria: " + categoria.getNmCategoria() + " porque ela está desativada");
+        }
+    }    
 }

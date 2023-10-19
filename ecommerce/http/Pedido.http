@@ -19,15 +19,15 @@ Content-Type: application/json
             },
             "descProduto": 0,
             "acresProduto": 0,
-            "quantidade": 10
+            "quantidade": 5
         },
         {
             "produto": {
-                "idProd": 2
+                "idProd": 1
             },
             "descProduto": 0,
             "acresProduto": 5,
-            "quantidade": 9
+            "quantidade": 5
         }
     ]
 }

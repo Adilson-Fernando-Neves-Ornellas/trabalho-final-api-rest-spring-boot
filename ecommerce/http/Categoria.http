@@ -1,12 +1,12 @@
 GET http://localhost:8080/categorias
 ###
 
-GET http://localhost:8080/categorias/1
+GET http://localhost:8080/categorias/2
 ###
 
 POST http://localhost:8080/categorias
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyLCJleHAiOjE2OTc4MjA5MDJ9.j195XssraOzXdJ-3LZi4rQ4xy0-IR7GLvuOsj_b5Ox4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzQzNDMxLCJleHAiOjE2OTc4Mjk4MzF9.qq1kN-uEyyBblsmSDirD1Q1PMfkylcRsxakKLPGrjMc
 
 {
     "nmCategoria": "Vestuário",
@@ -17,11 +17,33 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyL
 
 POST http://localhost:8080/categorias
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyLCJleHAiOjE2OTc4MjA5MDJ9.j195XssraOzXdJ-3LZi4rQ4xy0-IR7GLvuOsj_b5Ox4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzQzNDMxLCJleHAiOjE2OTc4Mjk4MzF9.qq1kN-uEyyBblsmSDirD1Q1PMfkylcRsxakKLPGrjMc
 
 {    
     "nmCategoria": "Alimentos",
     "descricao": "Alimento para alimentar os que precisam de alimento",
-    "statusCate": true
+    "statusCate": false
+}
+###
+
+PUT http://localhost:8080/categorias/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzQzNDMxLCJleHAiOjE2OTc4Mjk4MzF9.qq1kN-uEyyBblsmSDirD1Q1PMfkylcRsxakKLPGrjMc
+
+{
+    "nmCategoria": "Vestuário",
+    "descricao": "Roupas e acessórios",
+    "statusCate": false
+}
+###
+
+PUT http://localhost:8080/categorias/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzQzNDMxLCJleHAiOjE2OTc4Mjk4MzF9.qq1kN-uEyyBblsmSDirD1Q1PMfkylcRsxakKLPGrjMc
+
+{    
+    "nmCategoria": "Alimentos",
+    "descricao": "Alimento para alimentar os que precisam de alimento",
+    "statusCate": false
 }
 ###
