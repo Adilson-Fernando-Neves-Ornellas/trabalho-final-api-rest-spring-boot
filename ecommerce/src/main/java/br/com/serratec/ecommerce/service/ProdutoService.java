@@ -82,13 +82,15 @@ public class ProdutoService {
         Produto produtoModel = modelMapper.map(produtoRequest, Produto.class);
         produtoModel.setIdProd(id);
 
-        auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Atualizar", prodBanco, produtoModel);
+        auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Atualizado", prodBanco, produtoModel);
 
         return modelMapper.map(produtoRepositoryAction.save(produtoModel), ProdutoResponseDTO.class);
     }
 
     public void deletar(long id) {
-        obterPorId(id);
+       
+        var prodBanco = obterPorId(id);
+        auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Deletado",prodBanco, "");
         produtoRepositoryAction.deleteById(id);
     }
 
