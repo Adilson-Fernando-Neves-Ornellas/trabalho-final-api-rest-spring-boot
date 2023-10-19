@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;

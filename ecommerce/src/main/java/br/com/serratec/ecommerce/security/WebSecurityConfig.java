@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authorization.AuthenticatedAuthorizationManager;
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity // aqui informo que é uma classe se configuracao de seguranca do springSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -50,26 +52,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         //parte das configuracoes, por enquanto ignorar
         http
             .cors().and().csrf().disable()
-            //.exceptionHandling().authenticationEntryPoint((request, response, authException)->response.sendError(401))
-            .exceptionHandling()
+            .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-
             /*
              * Daqui para baixo vamos modificar para fazer nossas validacoes dinamicas
              * aqui vamos informar
              */
-
-
-            .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login","/swagger-ui/index.html#", "/pedidos")
+            .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login")
              .permitAll() // informo que todos podem acessar esses endpontis sem autorisacao
             
              .anyRequest()
-             .permitAll();
-             //.authenticated();//digo que qualquer outro endpont nao mapeado acima deve cobrar autenticacao
+             //.permitAll();
+             .authenticated();//digo que qualquer outro endpont nao mapeado acima deve cobrar autenticacao
 
              http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
