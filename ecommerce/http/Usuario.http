@@ -1,5 +1,5 @@
 GET http://localhost:8080/usuarios
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5IiwiaWF0IjoxNjk3NjUxMTIzLCJleHAiOjE2OTc3Mzc1MjN9.qu7Hmcw68eoiQFNoh78f0_q7ikIa6QgSOTHn30hmupc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3Njg1NjY1LCJleHAiOjE2OTc3NzIwNjV9.QAbYJAnVQXJa9pHVWwq_HkfuFEWatTdWxpAVTTfDKSI
 Content-Type: application/json
 ###
 
@@ -10,19 +10,11 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-<<<<<<< HEAD
-    "nmUsuario": "Adilson Fernando ",
-    "login": "rorivaldinho33",
-    "senha": "12345687",
-    "email": "ornellas00@hotmail.com",
-    "telefone": "219429456293",
-=======
     "nmUsuario": "Rorivaldo8",
     "login": "rorivaldinho8",
     "senha": "1234567",
     "email": "rorivadfg8@gmail.com",
     "telefone": "219929456298",
->>>>>>> feature/adicionandoUmaCategoriaAoProduto
     "perfil": "ADMIN"
 }
 ###
@@ -31,7 +23,7 @@ POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
 {
-    "email": "rorivadfg6@gmail.com",
+    "email": "rorivadfg8@gmail.com",
     "senha": "1234567"
 }
 

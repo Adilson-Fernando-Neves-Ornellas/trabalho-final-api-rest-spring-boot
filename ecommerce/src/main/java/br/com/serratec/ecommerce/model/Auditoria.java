@@ -12,9 +12,6 @@ import javax.persistence.ManyToOne;
 
 import br.com.serratec.ecommerce.enums.TipoEntidade;
 
-
-
-
 @Entity
 public class Auditoria {
     
@@ -41,18 +38,18 @@ public class Auditoria {
     @Column(nullable = false)
     private String vlAtualizado;
 
-    
-    
-    public Auditoria(Usuario usuario, String movimentacao, TipoEntidade entidade, 
-    String vlOrinal,String vlAtualizado) {
-        this.usuario = usuario;
-        this.dataAlteracao = new Date();
+    // constructs
+    public Auditoria(TipoEntidade tipoEntidade, String movimentacao, String vlOrinal, 
+    String vlAtualizado,Usuario usuario) {
+        this.entidade = tipoEntidade;
         this.movimentacao = movimentacao;
-        this.entidade = entidade;
-        this.vlOrinal = vlOrinal;
+        this.vlOrinal= vlOrinal;
         this.vlAtualizado = vlAtualizado;
+        this.usuario = usuario;
+        this.dataAlteracao= new Date();
     }
 
+    // get and set
     public long getIdAuditoria() {
         return idAuditoria;
     }

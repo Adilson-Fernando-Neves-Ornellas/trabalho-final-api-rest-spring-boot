@@ -6,13 +6,19 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
+import br.com.serratec.ecommerce.enums.TipoEntidade;
+import br.com.serratec.ecommerce.model.Auditoria;
 import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.Produto;
+import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.ProdutoRepository;
 
@@ -24,6 +30,9 @@ public class ProdutoService {
 
     @Autowired
     private CategoriaService categoriaService;
+
+    @Autowired
+    private AuditoriaService auditoriaService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -48,29 +57,34 @@ public class ProdutoService {
     @Transactional
     public ProdutoResponseDTO adcionar(ProdutoRequestDTO produtoRequest) {
 
-        Produto produto = modelMapper.map(produtoRequest, Produto.class);
+        Produto produtoModel = modelMapper.map(produtoRequest, Produto.class);
 
         Categoria categoria = modelMapper.map(categoriaService.obterPorId(produtoRequest.getIdCategoria()),
                 Categoria.class);
 
-        produto.setCategoria(categoria);
+        produtoModel.setCategoria(categoria);
 
-        produto.validarEstoque();
-        produto.validarValorStatus();
+        produtoModel.validarEstoque();
+        produtoModel.validarValorStatus();
 
-        produto = produtoRepositoryAction.save(produto);
+        produtoModel = produtoRepositoryAction.save(produtoModel);
 
-        return modelMapper.map(produto, ProdutoResponseDTO.class);
+        auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Cadastro", "", produtoModel);
+
+        return modelMapper.map(produtoModel, ProdutoResponseDTO.class);
 
     }
 
     public ProdutoResponseDTO atualizar(Long id, ProdutoRequestDTO produtoRequest) {
-        obterPorId(id);
+        
+        var prodBanco = obterPorId(id);
 
-        Produto produto = modelMapper.map(produtoRequest, Produto.class);
-        produto.setIdProd(id);
+        Produto produtoModel = modelMapper.map(produtoRequest, Produto.class);
+        produtoModel.setIdProd(id);
 
-        return modelMapper.map(produtoRepositoryAction.save(produto), ProdutoResponseDTO.class);
+        auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Atualizar", prodBanco, produtoModel);
+
+        return modelMapper.map(produtoRepositoryAction.save(produtoModel), ProdutoResponseDTO.class);
     }
 
     public void deletar(long id) {
