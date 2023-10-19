@@ -23,7 +23,7 @@ Content-Type: application/json
         },
         {
             "produto": {
-                "idProd": 2
+                "idProd": 1
             },
             "descProduto": 0,
             "acresProduto": 5,

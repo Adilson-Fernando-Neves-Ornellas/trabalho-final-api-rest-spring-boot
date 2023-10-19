@@ -34,9 +34,6 @@ public class UsuarioService  {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    //@Autowired
-    //private PedidoService pedidoService;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
