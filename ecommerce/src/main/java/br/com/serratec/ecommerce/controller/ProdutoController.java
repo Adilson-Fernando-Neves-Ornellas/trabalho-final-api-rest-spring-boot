@@ -3,6 +3,7 @@ package br.com.serratec.ecommerce.controller;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,16 +28,18 @@ public class ProdutoController {
     private ProdutoService produtoServiceAction;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<List<ProdutoResponseDTO>> obterTodos() {
         return ResponseEntity.ok(produtoServiceAction.obterTodos());
     }
-
+    
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoResponseDTO> obterPorId(@PathVariable long id) {
         return ResponseEntity.ok(produtoServiceAction.obterPorId(id));
     }
-
+    
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ProdutoResponseDTO> adicionar(@RequestBody ProdutoRequestDTO produto) {
         ProdutoResponseDTO produtoAdicionado = produtoServiceAction.adcionar(produto);
 
@@ -46,6 +49,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable long id, @RequestBody ProdutoRequestDTO produto) {
         ProdutoResponseDTO produtoAtualizado = produtoServiceAction.atualizar(id, produto);
 
@@ -55,6 +59,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> deletar(@PathVariable long id) {
         produtoServiceAction.deletar(id);
 

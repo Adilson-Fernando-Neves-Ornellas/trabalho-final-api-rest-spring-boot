@@ -1,7 +1,6 @@
 package br.com.serratec.ecommerce.security;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Optional;
 
 import javax.servlet.FilterChain;
@@ -45,7 +44,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
 
                     //nesse ponto verificamos se o usuario esta autenticando ou nao
                     // aqui tambem poderiamos validar as permissoes
-                    UsernamePasswordAuthenticationToken autenticacao = new UsernamePasswordAuthenticationToken(usuario, null, Collections.emptyList());
+                    UsernamePasswordAuthenticationToken autenticacao = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 
                     //mudo a  autenticacao para a propria requisicao
                     autenticacao.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
