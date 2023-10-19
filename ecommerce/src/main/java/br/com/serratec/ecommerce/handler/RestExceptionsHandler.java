@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException.UnprocessableEntity;
 
 import br.com.serratec.ecommerce.model.error.ErrorResposta;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
@@ -22,6 +23,14 @@ public class RestExceptionsHandler {
         String data = ConversorData.converterDataParaDataHora(new Date());
         ErrorResposta error = new ErrorResposta(400, "Bad Request", ex.getMessage(), data);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UnprocessableEntity.class)
+    public ResponseEntity<ErrorResposta> handlerUnprocessableEntityException(UnprocessableEntity ex) {
+
+        String data = ConversorData.converterDataParaDataHora(new Date());
+        ErrorResposta error = new ErrorResposta(422, "Unprocessable Entity", ex.getMessage(), data);
+        return new ResponseEntity<>(error, HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(ResourceBadRequestException.class)

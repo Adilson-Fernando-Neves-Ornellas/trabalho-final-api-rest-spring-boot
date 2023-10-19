@@ -3,6 +3,7 @@ package br.com.serratec.ecommerce.model;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,10 +18,12 @@ import javax.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.client.HttpClientErrorException.UnprocessableEntity;
 
 //import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import br.com.serratec.ecommerce.enums.Perfil;
+import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 
 @Entity
 public class Usuario implements UserDetails{
@@ -181,6 +184,18 @@ public class Usuario implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-    
+    /*
+    public void validarPerfil(Perfil perfil) { 
+        EnumSet<Perfil> perfisValido = EnumSet.of(Perfil.CLIENTE, Perfil.ADMIN);
+        if (!perfisValido.contains(perfil)) {
+            throw new UnprocessableEntity("O perfil " + perfil + " não é válido.");
+        }
+    }   
+*/
+    public void camposNulo() {
+        if (nmUsuario.equals("")|| login.equals("")|| senha.equals("") || email.equals("") || telefone.equals("")) {
+            throw new ResourceBadRequestException("Os campos não podem ser nulos.");
+        }
+    }
     }
     
