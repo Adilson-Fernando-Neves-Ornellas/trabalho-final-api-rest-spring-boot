@@ -184,14 +184,14 @@ public class Usuario implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
-    /*
+    
     public void validarPerfil(Perfil perfil) { 
         EnumSet<Perfil> perfisValido = EnumSet.of(Perfil.CLIENTE, Perfil.ADMIN);
         if (!perfisValido.contains(perfil)) {
-            throw new UnprocessableEntity("O perfil " + perfil + " não é válido.");
+            throw new IllegalArgumentException("O perfil " + perfil + " não é válido.");
         }
     }   
-*/
+
     public void camposNulo() {
         if (nmUsuario.equals("")|| login.equals("")|| senha.equals("") || email.equals("") || telefone.equals("")) {
             throw new ResourceBadRequestException("Os campos não podem ser nulos.");
