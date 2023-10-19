@@ -54,15 +54,7 @@ public class PedidoController {
     } 
 
     @PostMapping
-<<<<<<< HEAD
-    //@PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {
-        PedidoResponseDTO pedidoadicionado = pedidoService.savePedido(pedido);
 
-        return ResponseEntity
-                .status(201)
-                .body(pedidoadicionado);
-=======
     public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
         
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedido.getIdUsuario());
@@ -70,7 +62,6 @@ public class PedidoController {
         EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(),pedido.getDescontoTotal(),pedido.getAcrescimoTotal(),pedido.getValorFinal(),pedido.getFormaPagamento(),pedido.getObservacao(),pedido.getPedidoItens(), "Cliente "+ usuarioResponse.getNmUsuario()+ ", seu pedido de numero "+pedido.getId()+" foi adicionado com Sucesso");
         
         return pedidoService.savePedido(pedido);
->>>>>>> 18b601f5683ca7e563e0d7fae08db90b2e114a90
     }
 
     @PutMapping("/{id}")
