@@ -28,7 +28,6 @@ public class ProdutoController {
     private ProdutoService produtoServiceAction;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<List<ProdutoResponseDTO>> obterTodos() {
         return ResponseEntity.ok(produtoServiceAction.obterTodos());
     }

@@ -3,6 +3,7 @@ package br.com.serratec.ecommerce.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,17 +40,20 @@ public class CategoriaController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public CategoriaResponseDTO adicionar(@RequestBody CategoriaRequestDTO categoriaDTO){
         return categoriaService.adicionar(categoriaDTO);
     }
 
     @PutMapping(value="/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public CategoriaResponseDTO atualizar(@PathVariable Long id, @RequestBody CategoriaRequestDTO categoriaDTO){
         return categoriaService.atualizar(id, categoriaDTO);
 
     }
 
     @DeleteMapping(value ="/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(@PathVariable Long id){
         categoriaService.deletar(id);
 

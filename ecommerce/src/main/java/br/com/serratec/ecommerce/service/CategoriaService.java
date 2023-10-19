@@ -39,7 +39,7 @@ public class CategoriaService {
     public CategoriaResponseDTO obterPorId(long id) {
 
         return modelMapper.map(categoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Nenhum registro encontardo para o id: " + id)),
+                .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontardo para o id: " + id)),
                 CategoriaResponseDTO.class);
     }
 
