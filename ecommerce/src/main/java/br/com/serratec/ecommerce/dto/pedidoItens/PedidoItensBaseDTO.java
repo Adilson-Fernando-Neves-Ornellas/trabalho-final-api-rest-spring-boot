@@ -4,6 +4,7 @@ public class PedidoItensBaseDTO {
 
     // private long idPedido;
     private long idProduto;
+    private double vlUnitario;
     private double descontoProd;
     private double acrescimoProd;
     private long quantidade;
@@ -48,4 +49,11 @@ public class PedidoItensBaseDTO {
         this.quantidade = quantidade;
     }   
     
+     public double getVlUnitario() {
+        return vlUnitario;
+    }
+
+    public void setVlUnitario(double vlUnitario) {
+        this.vlUnitario = vlUnitario;
+    }
 }

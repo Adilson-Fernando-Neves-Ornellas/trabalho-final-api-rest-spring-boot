@@ -26,6 +26,8 @@ public class PedidoItens {
     @JsonBackReference
     private Produto produto;
 
+    private double vlUnitario;
+
     private double descontoProd;
 
     private double acrescimoProd;
@@ -35,10 +37,11 @@ public class PedidoItens {
 
     private double valorTotal;   
 
-    public PedidoItens(long idPedidoItens, Produto produto, double descontoProd, double acrescimoProd,
+    public PedidoItens(long idPedidoItens, Produto produto, double vlUnitario, double descontoProd, double acrescimoProd,
             int quantidade, double valorTotal) {
         this.idPedidoItens = idPedidoItens;
         this.produto = produto;
+        this.vlUnitario = vlUnitario;
         this.descontoProd = descontoProd;
         this.acrescimoProd = acrescimoProd;
         this.quantidade = quantidade;
@@ -101,6 +104,15 @@ public class PedidoItens {
 
     public void setValorTotal(double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    
+    public double getVlUnitario() {
+        return vlUnitario;
+    }
+
+    public void setVlUnitario(double vlUnitario) {
+        this.vlUnitario = vlUnitario;
     }
 
     

@@ -91,6 +91,7 @@ public class PedidoService {
         if(estoqueAtual < item.getQuantidade() || produtoResponse.getStatusProd() == false){
             throw new ResourceBadRequestException("O produto com ID: " + idProd + " não possui estoque suficiente ou está indisponível");
         }
+        item.setVlUnitario(produtoResponse.getValorProd());
 
         item.setValorTotal((produtoResponse.getValorProd() * ((item.getAcresProduto() / 100 + 1) - (item.getDescProduto() / 100))) * item.getQuantidade());
 

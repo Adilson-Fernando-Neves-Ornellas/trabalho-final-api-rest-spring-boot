@@ -23,7 +23,7 @@ POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
 {
-    "email": "rorivadfg8@gmail.com",
+    "email": "rorivadfg1@gmail.com",
     "senha": "1234567"
 }
 
