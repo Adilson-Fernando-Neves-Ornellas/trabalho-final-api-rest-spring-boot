@@ -17,6 +17,7 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.PedidoItens;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
+import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
 
 @Service
@@ -43,7 +44,7 @@ public class PedidoService {
         Optional<Pedido> optPedido = pedidoRepository.findById(id);
 
         if(optPedido.isEmpty()) {
-            throw new RuntimeException("Nenhum pedido encontrado com o ID: " + id);
+            throw new ResourceNotFoundException("Nenhum pedido encontrado com o ID: " + id);
         }
 
         return mapper.map(optPedido.get(), PedidoResponseDTO.class);
