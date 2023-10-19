@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,19 +40,18 @@ public class UsuarioControler {
     //private EmailService emailService;
 
     @GetMapping
-    //@ApiOperation(value = "RETORNA UMA LISTA COM TODOS ")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<UsuarioResponseDTO>> obterTodos(){
         return ResponseEntity.ok(usuarioService.obterTodos());
     }
     
     @GetMapping("/{id}")
-    //@ApiOperation(value = "RETORNA UM EXPECIFICO PELO ID ")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable long id){
         return ResponseEntity.ok(usuarioService.obterPorId(id));
     }
 
     @PostMapping
-   // @ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAdicionado = usuarioService.adcionar(usuario);
         testeEnvioDeEmail("Cliente Adicionado", usuario.getEmail(), "Cliente " + usuario.getNmUsuario() + " adicionado com Sucesso");
@@ -64,7 +64,6 @@ public class UsuarioControler {
 
 
     @PutMapping("/{id}")
-    //@ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
     public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAtualizado = usuarioService.atualizar(id, usuario);
 
@@ -75,7 +74,7 @@ public class UsuarioControler {
     }
 
     @DeleteMapping("/{id}")
-    //@ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> deletar(@PathVariable long id){
         usuarioService.deletar(id);
 
@@ -89,8 +88,6 @@ public class UsuarioControler {
     @Autowired
     private EmailService emailServiceAction;
 
-    @PostMapping("/email")
-    //@ApiOperation(value = "MANDA UM EMAIL TESTE")
     public ResponseEntity<?> testeEnvioDeEmail(String assunto, String emailDestinatario, String mensagem ){
 
         List<String> destinatarios = new ArrayList<>();

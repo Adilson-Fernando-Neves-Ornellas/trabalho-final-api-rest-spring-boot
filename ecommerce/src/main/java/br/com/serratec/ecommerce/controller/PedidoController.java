@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,23 +30,23 @@ public class PedidoController {
     }
 
     @GetMapping
+     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<PedidoResponseDTO>> obterTodos() {
         return ResponseEntity.ok(pedidoService.obterTodos());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<PedidoResponseDTO> obterPorId(@PathVariable Long id) {
         return ResponseEntity.ok(pedidoService.obterPorId(id));
     } 
 
     @PostMapping
-    //@ApiOperation(value = "ADICIONA MAIS UM NA LISTA ")
     public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
         return pedidoService.savePedido(pedido);
     }
 
     @PutMapping("/{id}")
-    //@ApiOperation(value = "ATUALIZA UM NA LISTA EXPECIFICO")
     public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id, @RequestBody PedidoRequestDTO pedidoRequest) {
         PedidoResponseDTO pedidoAtualizado = pedidoService.atualizar(id, pedidoRequest);
 
@@ -55,7 +56,7 @@ public class PedidoController {
     }
 
     @DeleteMapping("/{id}")
-     //@ApiOperation(value = "DELETA UM NA LISTA EXPECIFICO")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> deletar(@PathVariable long id) {
         pedidoService.deletar(id);
 
