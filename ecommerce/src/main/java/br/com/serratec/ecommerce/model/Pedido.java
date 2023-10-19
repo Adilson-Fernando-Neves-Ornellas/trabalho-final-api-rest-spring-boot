@@ -58,13 +58,12 @@ public class Pedido {
         this.dataCompra = new Date();
     }
 
-    public Pedido(long idPedido, double descontoTotal, double acrescimoTotal, double valorFinal, Date dataCompra,
+    public Pedido(long idPedido, double descontoTotal, double acrescimoTotal, double valorFinal, 
             FormaPagamento formaPagamento, String observacao, Usuario usuario, List<PedidoItens> itens) {
         this.idPedido = idPedido;
         this.descontoTotal = descontoTotal;
         this.acrescimoTotal = acrescimoTotal;
         this.valorFinal = valorFinal;
-        this.dataCompra = dataCompra;
         this.formaPagamento = formaPagamento;
         this.observacao = observacao;
         this.usuario = usuario;

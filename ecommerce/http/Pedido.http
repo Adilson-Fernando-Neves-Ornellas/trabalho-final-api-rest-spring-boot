@@ -19,7 +19,7 @@ Content-Type: application/json
             },
             "descProduto": 0,
             "acresProduto": 0,
-            "quantidade": 20
+            "quantidade": 10
         },
         {
             "produto": {
@@ -27,7 +27,7 @@ Content-Type: application/json
             },
             "descProduto": 0,
             "acresProduto": 5,
-            "quantidade": 30
+            "quantidade": 9
         }
     ]
 }

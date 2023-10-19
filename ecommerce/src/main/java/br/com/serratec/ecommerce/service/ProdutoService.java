@@ -79,7 +79,12 @@ public class ProdutoService {
         
         var prodBanco = obterPorId(id);
 
+        if(produtoRequest.getEstoqueProd() == 0) {
+            produtoRequest.setStatusProd(false);
+        }
+
         Produto produtoModel = modelMapper.map(produtoRequest, Produto.class);
+
         produtoModel.setIdProd(id);
 
         auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Atualizar", prodBanco, produtoModel);

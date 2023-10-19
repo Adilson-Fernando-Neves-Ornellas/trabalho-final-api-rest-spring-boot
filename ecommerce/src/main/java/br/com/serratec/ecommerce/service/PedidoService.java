@@ -16,6 +16,7 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.PedidoItens;
+import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
 
 @Service
@@ -84,6 +85,12 @@ public class PedidoService {
     private PedidoItens adicionarValorTotalItem(PedidoItens item) {
         long idProd = item.getProduto().getIdProd();
         ProdutoResponseDTO produtoResponse = produtoService.obterPorId(idProd);
+
+        double estoqueAtual = produtoResponse.getEstoqueProd();
+
+        if(estoqueAtual < item.getQuantidade() || produtoResponse.getStatusProd() == false){
+            throw new ResourceBadRequestException("O produto com ID: " + idProd + " não possui estoque suficiente ou está indisponível");
+        }
 
         item.setValorTotal((produtoResponse.getValorProd() * ((item.getAcresProduto() / 100 + 1) - (item.getDescProduto() / 100))) * item.getQuantidade());
 
