@@ -16,6 +16,7 @@ import br.com.serratec.ecommerce.model.PedidoItens;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
+import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class PedidoService {
@@ -76,6 +77,11 @@ public class PedidoService {
         obterPorId(id);
 
         pedidoRequest.setId(id);
+
+        Pedido pedidoBanco = pedidoRepository.findById(id)
+        .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontardo para o id: " + id));
+
+        //Utils.copyNonNullProperties(pedidoBanco, pedidoRequest);
 
         Pedido pedidoModel = pedidoRepository.save(mapper.map(pedidoRequest, Pedido.class));   
         return mapper.map(pedidoModel, PedidoResponseDTO.class);

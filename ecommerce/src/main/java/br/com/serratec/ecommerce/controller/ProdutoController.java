@@ -27,12 +27,12 @@ public class ProdutoController {
     public ResponseEntity<List<ProdutoResponseDTO>> obterTodos() {
         return ResponseEntity.ok(produtoServiceAction.obterTodos());
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoResponseDTO> obterPorId(@PathVariable long id) {
         return ResponseEntity.ok(produtoServiceAction.obterPorId(id));
     }
-    
+
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<ProdutoResponseDTO> adicionar(@RequestBody ProdutoRequestDTO produto) {

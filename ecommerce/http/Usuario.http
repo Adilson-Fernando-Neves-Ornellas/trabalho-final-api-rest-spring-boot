@@ -1,9 +1,14 @@
 GET http://localhost:8080/usuarios
+<<<<<<< HEAD
+=======
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODE4MzM5LCJleHAiOjE2OTc5MDQ3Mzl9.URW-hzH1nOGKfk6AqeFnG8a-3v9qBGk2j84I50qXQmc
+>>>>>>> 5dc2fe2ada6b2f1e985a5e3bd647d5876f51ea6d
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3LCJleHAiOjE2OTc5MTg5MTd9.GgqSkV18DFsaz4ERntbvL8aRZku6h6lz3jINEoEo7XQ
 ###
 
-GET http://localhost:8080/usuarios/1
+GET http://localhost:8080/usuarios/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODE4MzM5LCJleHAiOjE2OTc5MDQ3Mzl9.URW-hzH1nOGKfk6AqeFnG8a-3v9qBGk2j84I50qXQmc
 ###
 
 POST http://localhost:8080/usuarios
@@ -67,16 +72,15 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3L
 }
 ###
 
-PUT http://localhost:8080/usuarios/3
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0Mjc3LCJleHAiOjE2OTc4MjA2Nzd9.MF2KKraqqiBv2eRpvUowocFUTnnVpFYwE6Zq4FU8y00
+PUT http://localhost:8080/usuarios/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODE4MzM5LCJleHAiOjE2OTc5MDQ3Mzl9.URW-hzH1nOGKfk6AqeFnG8a-3v9qBGk2j84I50qXQmc
 Content-Type: application/json
 
 {
-    "nmUsuario": "Rorivaldo1",
+    "nmUsuario": "Rorivaldo122",
     "login": "rorivaldinho1",
     "senha": "1234567",
     "email": "rorivadfg1@gmail.com",
-    "telefone": "219929456290",
     "perfil": "ADMIN"
 }
 ###

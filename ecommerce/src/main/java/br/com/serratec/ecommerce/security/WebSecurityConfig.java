@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity // aqui informo que é uma classe se configuracao de seguranca do springSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
@@ -27,47 +27,47 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private JWTAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception{
+    public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-        .userDetailsService(customUserDetailsService)
-        .passwordEncoder(passwordEncoder());
+                .userDetailsService(customUserDetailsService)
+                .passwordEncoder(passwordEncoder());
     }
-    
+
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
-    //metodo que tem a configuracao global de acesso e permissoes por rotas
+    // metodo que tem a configuracao global de acesso e permissoes por rotas
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
 
-        //parte das configuracoes, por enquanto ignorar
+        // parte das configuracoes, por enquanto ignorar
         http
-            .cors().and().csrf().disable()
-            .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
-            .and()
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-            /*
-             * Daqui para baixo vamos modificar para fazer nossas validacoes dinamicas
-             * aqui vamos informar
-             */
-            .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login")
-            .permitAll() // informo que todos podem acessar esses endpontis sem autorisacao
-            .antMatchers(HttpMethod.GET, "/produtos", "/categorias")
-            .permitAll()
-            .anyRequest()
-            .authenticated();//digo que qualquer outro endpont nao mapeado acima deve cobrar autenticacao
+                .cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                /*
+                 * Daqui para baixo vamos modificar para fazer nossas validacoes dinamicas
+                 * aqui vamos informar
+                 */
+                .antMatchers(HttpMethod.POST, "/usuarios", "/usuarios/login")
+                .permitAll() // informo que todos podem acessar esses endpontis sem autorisacao
+                .antMatchers(HttpMethod.GET, "/produtos/**", "/categorias/**")
+                .permitAll()
+                .anyRequest()
+                .authenticated();// digo que qualquer outro endpont nao mapeado acima deve cobrar autenticacao
 
-             http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

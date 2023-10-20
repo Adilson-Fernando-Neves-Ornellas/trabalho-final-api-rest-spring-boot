@@ -12,6 +12,7 @@ import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.CategoriaRepository;
+import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class CategoriaService {
@@ -59,6 +60,7 @@ public class CategoriaService {
         if(!categoria.getProdutos().isEmpty() && categoriaDTO.getStatusCate() == false) {
             throw new ResourceBadRequestException("Não é possível desativar uma categoria que possua produtos vinculados a ela");
         }
+        //Utils.copyNonNullProperties(categoria, categoriaDTO);
 
         categoria.setDescricao(categoriaDTO.getDescricao());
         categoria.setNmCategoria(categoriaDTO.getNmCategoria());

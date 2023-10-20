@@ -56,12 +56,6 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    public void validarNome() {
-        if (nmCategoria.equals("") || descricao.equals("")) {
-            throw new ResourceBadRequestException("Nome da categoria e descrição obrigatórios");
-        }
-    }
-
     public boolean getStatusCate() {
         return statusCate;
     }
@@ -78,4 +72,15 @@ public class Categoria {
         this.produtos = produtos;
     }
 
+    public void validarNome() {
+        if (nmCategoria.equals("") || descricao.equals("")) {
+            throw new ResourceBadRequestException("Nome da categoria e descrição obrigatórios");
+        }
+    }
+
+    public void validarStatus() {
+        if (!statusCate) {
+            throw new ResourceBadRequestException("Status obrigatório!");
+        }
+    }
 }

@@ -24,6 +24,7 @@ import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.UsuarioRepository;
 import br.com.serratec.ecommerce.security.JWTService;
+import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class UsuarioService  {
@@ -85,6 +86,9 @@ public class UsuarioService  {
         Usuario usuario = modelMapper.map(usuarioRequest, Usuario.class);
         usuario.setId(id);
 
+        Usuario usuarioBanco = usuarioRepository.getReferenceById(id);
+
+        //Utils.copyNonNullProperties(usuarioBanco, usuario);
         return modelMapper.map(usuarioRepository.save(usuario), UsuarioResponseDTO.class);
     }
 

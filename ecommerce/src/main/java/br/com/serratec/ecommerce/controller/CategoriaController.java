@@ -2,6 +2,7 @@ package br.com.serratec.ecommerce.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,33 +24,36 @@ public class CategoriaController {
     private CategoriaService categoriaService;
 
     @GetMapping
-    public List<CategoriaResponseDTO> obterTodos(){
-        return categoriaService.obterCategoria();
+    public ResponseEntity<List<CategoriaResponseDTO>> obterTodos() {
+        return ResponseEntity.ok(categoriaService.obterCategoria());
     }
-    
-    @GetMapping(value="/{id}")
-    public CategoriaResponseDTO obterPorId (@PathVariable long id) {
-        return categoriaService.obterPorId(id);
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoriaResponseDTO> obterPorId(@PathVariable long id) {
+        return ResponseEntity.ok(categoriaService.obterPorId(id));
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public CategoriaResponseDTO adicionar(@RequestBody CategoriaRequestDTO categoriaDTO){
-        return categoriaService.adicionar(categoriaDTO);
+    public ResponseEntity<CategoriaResponseDTO> adicionar(@RequestBody CategoriaRequestDTO categoriaDTO) {
+        return ResponseEntity.status(201)
+                .body(categoriaService.adicionar(categoriaDTO));
     }
 
-    @PutMapping(value="/{id}")
+    @PutMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public CategoriaResponseDTO atualizar(@PathVariable Long id, @RequestBody CategoriaRequestDTO categoriaDTO){
-        return categoriaService.atualizar(id, categoriaDTO);
+    public ResponseEntity<CategoriaResponseDTO> atualizar(@PathVariable Long id,
+            @RequestBody CategoriaRequestDTO categoriaDTO) {
+        return ResponseEntity.status(200)
+                .body(categoriaService.atualizar(id, categoriaDTO));
 
     }
 
-    @DeleteMapping(value ="/{id}")
+    @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void delete(@PathVariable Long id){
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         categoriaService.deletar(id);
-
+        return ResponseEntity.status(204).build();
     }
-    
+
 }
