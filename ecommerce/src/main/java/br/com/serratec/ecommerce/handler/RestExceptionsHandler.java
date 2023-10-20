@@ -1,18 +1,17 @@
 package br.com.serratec.ecommerce.handler;
 
-import java.nio.file.AccessDeniedException;
 import java.util.Date;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException.UnprocessableEntity;
-
 import br.com.serratec.ecommerce.model.error.ErrorResposta;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
+
 
 @ControllerAdvice
 public class RestExceptionsHandler {

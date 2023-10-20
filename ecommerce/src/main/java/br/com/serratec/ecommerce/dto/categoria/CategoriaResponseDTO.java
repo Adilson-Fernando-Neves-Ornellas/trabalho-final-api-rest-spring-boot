@@ -1,9 +1,7 @@
 package br.com.serratec.ecommerce.dto.categoria;
 
 import java.util.List;
-
 import br.com.serratec.ecommerce.dto.produto.ProdutoCategoriaDTO;
-import br.com.serratec.ecommerce.model.Produto;
 
 public class CategoriaResponseDTO extends CategoriaRequestDTO{
 

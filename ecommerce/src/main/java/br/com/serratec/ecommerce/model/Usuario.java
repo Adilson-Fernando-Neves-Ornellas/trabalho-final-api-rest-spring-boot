@@ -6,22 +6,14 @@ import java.util.Date;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-//import javax.persistence.OneToMany;
-//import javax.persistence.OneToMany;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.client.HttpClientErrorException.UnprocessableEntity;
-
-//import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import br.com.serratec.ecommerce.enums.Perfil;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 

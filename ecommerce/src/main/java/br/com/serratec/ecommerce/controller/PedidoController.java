@@ -3,7 +3,6 @@ package br.com.serratec.ecommerce.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,9 +20,7 @@ import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.enums.FormaPagamento;
 import br.com.serratec.ecommerce.model.PedidoItens;
-import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.model.email.Email;
-import br.com.serratec.ecommerce.repository.UsuarioRepository;
 import br.com.serratec.ecommerce.service.EmailService;
 import br.com.serratec.ecommerce.service.PedidoService;
 import br.com.serratec.ecommerce.service.UsuarioService;
@@ -54,13 +51,16 @@ public class PedidoController {
     } 
 
     @PostMapping
-    public PedidoResponseDTO adicionar(@RequestBody PedidoRequestDTO pedido) {
-        
+    //@PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {     
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedido.getIdUsuario());
 
         EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(),pedido.getDescontoTotal(),pedido.getAcrescimoTotal(),pedido.getValorFinal(),pedido.getFormaPagamento(),pedido.getObservacao(),pedido.getPedidoItens(), "Cliente "+ usuarioResponse.getNmUsuario()+ ", seu pedido de numero "+pedido.getId()+" foi adicionado com Sucesso");
-        
-        return pedidoService.savePedido(pedido);
+
+        PedidoResponseDTO pedidoAdicionado = pedidoService.savePedido(pedido);
+        return ResponseEntity
+                .status(201)
+                .body(pedidoAdicionado);
     }
 
     @PutMapping("/{id}")
