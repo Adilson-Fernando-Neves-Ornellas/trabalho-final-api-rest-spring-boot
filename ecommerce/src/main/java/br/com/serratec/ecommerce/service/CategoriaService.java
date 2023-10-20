@@ -60,7 +60,7 @@ public class CategoriaService {
         if(!categoria.getProdutos().isEmpty() && categoriaDTO.getStatusCate() == false) {
             throw new ResourceBadRequestException("Não é possível desativar uma categoria que possua produtos vinculados a ela");
         }
-        Utils.copyNonNullProperties(categoria, categoriaDTO);
+        //Utils.copyNonNullProperties(categoria, categoriaDTO);
 
         categoria.setDescricao(categoriaDTO.getDescricao());
         categoria.setNmCategoria(categoriaDTO.getNmCategoria());

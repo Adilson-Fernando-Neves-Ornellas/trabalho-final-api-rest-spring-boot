@@ -28,12 +28,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyL
 
 PUT http://localhost:8080/categorias/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzQzNDMxLCJleHAiOjE2OTc4Mjk4MzF9.qq1kN-uEyyBblsmSDirD1Q1PMfkylcRsxakKLPGrjMc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3ODI3OTQ1LCJleHAiOjE2OTc5MTQzNDV9.ujhYWoEb60Of4HLQybPaIQJXYyc8_y1VWaMicx-jErE
 
 {
     "nmCategoria": "Vestuário",
     "descricao": "Roupas e acessórios",
-    "statusCate": false
+    "statusCate": true
 }
 ###
 

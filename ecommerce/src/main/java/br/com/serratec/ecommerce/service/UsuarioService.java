@@ -85,7 +85,7 @@ public class UsuarioService  {
 
         Usuario usuarioBanco = usuarioRepository.getReferenceById(id);
 
-        Utils.copyNonNullProperties(usuarioBanco, usuario);
+        //Utils.copyNonNullProperties(usuarioBanco, usuario);
         return modelMapper.map(usuarioRepository.save(usuario), UsuarioResponseDTO.class);
 
     }

@@ -25,7 +25,7 @@ import br.com.serratec.ecommerce.service.UsuarioService;
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin("*")
-public class UsuarioControler {
+public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
