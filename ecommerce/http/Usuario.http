@@ -10,10 +10,10 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-    "nmUsuario": "Rorivaldo1",
+    "nmUsuario": "Adilson Fernando",
     "login": "rorivaldinho1",
     "senha": "1234567",
-    "email": "rorivadfg1@gmail.com",
+    "email": "ornellas00@hotmail.com",
     "telefone": "219929456290",
     "perfil": "ADMIN"
 }
@@ -23,7 +23,7 @@ POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
 {
-    "email": "rorivadfg1@gmail.com",
+    "email": "ornellas00@hotmail.com",
     "senha": "1234567"
 }
 

@@ -54,10 +54,10 @@ public class PedidoController {
     //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {     
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedido.getIdUsuario());
-
-        EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(),pedido.getDescontoTotal(),pedido.getAcrescimoTotal(),pedido.getValorFinal(),pedido.getFormaPagamento(),pedido.getObservacao(),pedido.getPedidoItens(), "Cliente "+ usuarioResponse.getNmUsuario()+ ", seu pedido de numero "+pedido.getId()+" foi adicionado com Sucesso");
-
+        
         PedidoResponseDTO pedidoAdicionado = pedidoService.savePedido(pedido);
+        EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(),pedidoAdicionado.getDescontoTotal(),pedidoAdicionado.getAcrescimoTotal(),pedidoAdicionado.getValorFinal(),pedidoAdicionado.getFormaPagamento(),pedidoAdicionado.getObservacao(), pedido.getPedidoItens(), "Cliente "+ usuarioResponse.getNmUsuario()+ ", seu pedido de numero "+ pedidoAdicionado.getId()+" foi adicionado com Sucesso");
+
         return ResponseEntity
                 .status(201)
                 .body(pedidoAdicionado);
@@ -105,7 +105,7 @@ public class PedidoController {
     mensagem += "<h2>Itens do Pedido</h2>";
     mensagem += "<ul>";
     for (PedidoItens item : pedidoItens) {
-        mensagem += "<li>" + item.getDescProduto() + ": " + item.getQuantidade() + " unidades</li>";
+        mensagem += "<li>"+"Id do Produto: "+ item.getIdPedidoItens() + "Desconto do produto: " + item.getDescProduto() + "| Quantidade Item: " + item.getQuantidade() + " unidades</li>";
     }
     mensagem += "</ul>";
     
