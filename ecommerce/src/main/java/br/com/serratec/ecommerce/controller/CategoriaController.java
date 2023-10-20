@@ -1,17 +1,13 @@
 package br.com.serratec.ecommerce.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.serratec.ecommerce.dto.categoria.CategoriaRequestDTO;
 import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
 import br.com.serratec.ecommerce.service.CategoriaService;
-///import io.swagger.annotations.Api;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
 @RequestMapping("/categorias")
-//@Api(value = "CATEGORIAS")
 public class CategoriaController {
 
     @Autowired
@@ -58,8 +51,5 @@ public class CategoriaController {
         categoriaService.deletar(id);
 
     }
-    
-
-
     
 }

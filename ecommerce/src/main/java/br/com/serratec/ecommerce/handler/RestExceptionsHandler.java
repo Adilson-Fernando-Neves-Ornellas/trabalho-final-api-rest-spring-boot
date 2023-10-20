@@ -12,7 +12,6 @@ import br.com.serratec.ecommerce.model.error.ErrorResposta;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 
-
 @ControllerAdvice
 public class RestExceptionsHandler {
 

@@ -1,6 +1,5 @@
 package br.com.serratec.ecommerce.dto.categoria;
 
-
 public class CategoriaRequestDTO {
       
     private String nmCategoria;

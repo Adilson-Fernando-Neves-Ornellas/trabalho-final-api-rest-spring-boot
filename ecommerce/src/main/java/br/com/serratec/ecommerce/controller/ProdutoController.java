@@ -12,16 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.service.ProdutoService;
 
-
 @RestController
 @RequestMapping("/produtos")
-
 public class ProdutoController {
 
     @Autowired

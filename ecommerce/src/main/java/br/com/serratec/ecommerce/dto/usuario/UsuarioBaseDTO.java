@@ -3,14 +3,10 @@ package br.com.serratec.ecommerce.dto.usuario;
 import br.com.serratec.ecommerce.enums.Perfil;
 
 public abstract class UsuarioBaseDTO {
-   
 
     private String nmUsuario;
-
     private String login;
-
     private Perfil perfil;
-
     private String fotoUsuario;
 
 
@@ -45,7 +41,6 @@ public abstract class UsuarioBaseDTO {
     public void setFotoUsuario(String fotoUsuario) {
         this.fotoUsuario = fotoUsuario;
     } 
-
     
 }
 

@@ -3,13 +3,10 @@ package br.com.serratec.ecommerce.service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
@@ -115,6 +112,5 @@ public class PedidoService {
 
         return pedido;
     }
-
 
 }

@@ -142,5 +142,4 @@ public class Pedido {
         this.observacao = observacao;
     }
 
-    
 }

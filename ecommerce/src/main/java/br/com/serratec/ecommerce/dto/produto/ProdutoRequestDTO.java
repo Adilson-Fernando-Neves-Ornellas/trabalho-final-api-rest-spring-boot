@@ -5,7 +5,6 @@ public class ProdutoRequestDTO extends ProdutoBaseDTO {
     private long id;
     private long idCategoria;
 
-
     public long getIdProd() {
         return id;
     }

@@ -6,7 +6,6 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoCategoriaDTO;
 public class CategoriaResponseDTO extends CategoriaRequestDTO{
 
     private long idCategoria;
-
     private List<ProdutoCategoriaDTO> produtos;
 
 
@@ -30,7 +29,5 @@ public class CategoriaResponseDTO extends CategoriaRequestDTO{
     public void setProdutos(List<ProdutoCategoriaDTO> produtos) {
         this.produtos = produtos;
     }
-
-    
 
 }

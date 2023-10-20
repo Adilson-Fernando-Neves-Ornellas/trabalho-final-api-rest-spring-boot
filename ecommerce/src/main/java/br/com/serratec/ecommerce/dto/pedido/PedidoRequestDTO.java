@@ -1,7 +1,6 @@
 package br.com.serratec.ecommerce.dto.pedido;
 
 import java.util.List;
-
 import br.com.serratec.ecommerce.model.PedidoItens;
 
 public class PedidoRequestDTO extends PedidoBaseDTO{

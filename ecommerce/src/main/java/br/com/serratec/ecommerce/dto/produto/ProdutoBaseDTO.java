@@ -2,7 +2,6 @@ package br.com.serratec.ecommerce.dto.produto;
 
 public abstract class ProdutoBaseDTO {
 
-    // private long idProd;
     private String nomeProd;
     private double valorProd;
     private int estoqueProd;
@@ -10,7 +9,6 @@ public abstract class ProdutoBaseDTO {
     private String imgbase64Prod;
     private boolean statusProd;
     
-   
 
     public String getNomeProd() {
         return nomeProd;
@@ -59,6 +57,5 @@ public abstract class ProdutoBaseDTO {
     public void setStatusProd(boolean statusProd) {
         this.statusProd = statusProd;
     }
-
 
 }

@@ -2,20 +2,11 @@ package br.com.serratec.ecommerce.dto.pedidoItens;
 
 public class PedidoItensBaseDTO {
 
-    // private long idPedido;
     private long idProduto;
     private double vlUnitario;
     private double descontoProd;
     private double acrescimoProd;
     private long quantidade;
-    
-    // public long getIdPedido() {
-    //     return idPedido;
-    // }
-
-    // public void setIdPedido(long idPedido) {
-    //     this.idPedido = idPedido;
-    // }
 
     public long getIdProduto() {
         return idProduto;

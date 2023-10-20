@@ -3,17 +3,15 @@ package br.com.serratec.ecommerce.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.serratec.ecommerce.enums.TipoEntidade;
 import br.com.serratec.ecommerce.model.Auditoria;
 import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.repository.AuditoriaRepository;
 
-
 @Service
 public class AuditoriaService {
+    
     @Autowired
     private AuditoriaRepository auditoriaRepository;
 

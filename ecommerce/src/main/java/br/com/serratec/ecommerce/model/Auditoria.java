@@ -106,7 +106,4 @@ public class Auditoria {
         this.vlAtualizado = vlAtualizado;
     }
 
-    
-    
-  
 }

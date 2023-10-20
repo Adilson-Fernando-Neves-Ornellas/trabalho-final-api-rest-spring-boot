@@ -2,12 +2,9 @@ package br.com.serratec.ecommerce.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import br.com.serratec.ecommerce.dto.categoria.CategoriaRequestDTO;
 import br.com.serratec.ecommerce.dto.categoria.CategoriaResponseDTO;
 import br.com.serratec.ecommerce.enums.TipoEntidade;

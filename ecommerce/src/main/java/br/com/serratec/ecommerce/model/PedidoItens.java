@@ -115,5 +115,4 @@ public class PedidoItens {
         this.vlUnitario = vlUnitario;
     }
 
-    
 }

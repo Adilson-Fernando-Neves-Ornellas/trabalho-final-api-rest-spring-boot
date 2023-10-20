@@ -1,13 +1,10 @@
 package br.com.serratec.ecommerce.service;
 
 import java.util.Collections;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,8 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-
 import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
@@ -113,7 +108,5 @@ public class UsuarioService  {
             String token = BEARER + jwtService.gerarToken(autenticacao);
             UsuarioResponseDTO usuarioResponse = obterPorEmail(email);
             return new UsuarioLoginResponseDTO(token, usuarioResponse);
-
-
     }
 }

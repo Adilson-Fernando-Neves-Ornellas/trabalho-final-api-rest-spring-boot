@@ -19,6 +19,7 @@ public class Email {
 
     public Email() {
     }
+    
     // get and set
     public String getAssunto() {
         return assunto;

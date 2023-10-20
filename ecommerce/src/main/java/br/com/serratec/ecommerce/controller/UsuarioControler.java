@@ -2,7 +2,6 @@ package br.com.serratec.ecommerce.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,14 +14,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
 import br.com.serratec.ecommerce.model.email.Email;
 import br.com.serratec.ecommerce.service.EmailService;
-
 import br.com.serratec.ecommerce.service.UsuarioService;
 
 @RestController
@@ -54,8 +51,6 @@ public class UsuarioControler {
             .status(201)
             .body(usuarioAdicionado);
     }
-    
-
 
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
@@ -78,7 +73,7 @@ public class UsuarioControler {
     }
 
     // ----------------------------------------------
-    // TESTE ENVIO DE EMAIL 
+    // ENVIO DE EMAIL 
     @Autowired
     private EmailService emailServiceAction;
 
@@ -87,9 +82,6 @@ public class UsuarioControler {
         List<String> destinatarios = new ArrayList<>();
         destinatarios.add(emailDestinatario);
 
-
-        // String mensagem = "<h1 style=\"text-align: center;\">EMAIL TESTE TRABALHO API GRUPO 01</h1>";
-
         Email email = new Email(assunto, mensagem, "adilson.ornellas@aluno.senai.br", destinatarios);
 
         emailServiceAction.enviar(email);
@@ -97,7 +89,7 @@ public class UsuarioControler {
         return ResponseEntity.status(200).body("E-mail enviado com sucesso!!!");
     }
 
-     @PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<UsuarioLoginResponseDTO> logar(@RequestBody UsuarioLoginRequestDTO usuariologinRequest){
         
         UsuarioLoginResponseDTO usuarioLogado = usuarioService.logar(usuariologinRequest.getEmail(), usuariologinRequest.getSenha());

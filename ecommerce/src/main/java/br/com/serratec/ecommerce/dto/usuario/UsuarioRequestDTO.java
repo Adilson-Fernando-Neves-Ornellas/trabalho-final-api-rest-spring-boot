@@ -1,27 +1,11 @@
 
 package br.com.serratec.ecommerce.dto.usuario;
 
-//import java.util.List;
-
-//import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
-
 public class UsuarioRequestDTO extends UsuarioBaseDTO{
 
     private String senha;
-
     private String email;
-
     private String telefone;
-
-    //private List<PedidoRequestDTO> pedidos;
-
-    // public List<PedidoRequestDTO> getPedidos() {
-    //     return pedidos;
-    // }
-
-    // public void setPedidos(List<PedidoRequestDTO> pedidos) {
-    //     this.pedidos = pedidos;
-    // }
 
     public String getSenha() {
         return senha;

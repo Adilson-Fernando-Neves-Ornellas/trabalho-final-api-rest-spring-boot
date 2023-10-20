@@ -7,7 +7,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.16</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath /> 
 	</parent>
 	<groupId>br.com.serratec</groupId>
 	<artifactId>ecommerce</artifactId>
@@ -58,7 +58,7 @@
 			<version>3.1.1</version>
 		</dependency>
 
-		<!-- Swagger que não precisa de cofig porem não funcionava o upload image-->
+		<!-- Swagger que não precisa de cofig -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
@@ -70,7 +70,7 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
-<!-- Versões exclusivas para spring menor que 3.0.0 -->
+		<!-- Versões exclusivas para spring menor que 3.0.0 -->
 		<!-- Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

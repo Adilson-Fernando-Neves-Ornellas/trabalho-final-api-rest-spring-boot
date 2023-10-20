@@ -2,10 +2,8 @@ package br.com.serratec.ecommerce.security;
 
 import java.util.Date;
 import java.util.Optional;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
 import br.com.serratec.ecommerce.model.Usuario;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

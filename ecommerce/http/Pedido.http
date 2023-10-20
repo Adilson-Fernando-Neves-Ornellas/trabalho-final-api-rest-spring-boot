@@ -16,7 +16,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyL
     "pedidoItens": [
         {
             "produto": {
-                "idProd": 5
+                "idProd": 6
             },
             "descProduto": 0,
             "acresProduto": 0,
@@ -24,7 +24,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyL
         },
         {
             "produto": {
-                "idProd": 5
+                "idProd": 6
             },
             "descProduto": 0,
             "acresProduto": 5,

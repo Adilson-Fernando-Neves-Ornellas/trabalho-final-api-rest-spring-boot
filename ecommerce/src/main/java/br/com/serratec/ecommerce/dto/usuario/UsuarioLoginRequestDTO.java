@@ -3,7 +3,6 @@ package br.com.serratec.ecommerce.dto.usuario;
 public class UsuarioLoginRequestDTO {
     
     private String email;
-
     private String senha;
 
     public String getEmail() {

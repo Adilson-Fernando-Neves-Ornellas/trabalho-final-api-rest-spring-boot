@@ -19,6 +19,7 @@ import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 
 @Entity
 public class Usuario implements UserDetails{
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idUsuario")
@@ -42,7 +43,6 @@ public class Usuario implements UserDetails{
     @Column(nullable = false)
     private Date dataCadastro;
 
-    //@Column(nullable = false)
     private Perfil perfil;
 
     private String fotoUsuario;
@@ -189,5 +189,5 @@ public class Usuario implements UserDetails{
             throw new ResourceBadRequestException("Os campos não podem ser nulos.");
         }
     }
-    }
+}
     
