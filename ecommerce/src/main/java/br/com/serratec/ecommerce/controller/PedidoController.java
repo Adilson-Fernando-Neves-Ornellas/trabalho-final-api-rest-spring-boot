@@ -38,11 +38,13 @@ public class PedidoController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<PedidoResponseDTO>> obterTodos() {
         return ResponseEntity.ok(pedidoService.obterTodos());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<PedidoResponseDTO> obterPorId(@PathVariable Long id) {
         return ResponseEntity.ok(pedidoService.obterPorId(id));
     }

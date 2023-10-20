@@ -1,5 +1,6 @@
 package br.com.serratec.ecommerce.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +15,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioResponseDTO;
+import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
+import br.com.serratec.ecommerce.repository.PedidoRespository;
 import br.com.serratec.ecommerce.repository.UsuarioRepository;
 import br.com.serratec.ecommerce.security.JWTService;
 import br.com.serratec.ecommerce.utils.Utils;
@@ -38,6 +43,9 @@ public class UsuarioService  {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+     @Autowired
+    private PedidoService pedidoService;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -113,4 +121,31 @@ public class UsuarioService  {
             UsuarioResponseDTO usuarioResponse = obterPorEmail(email);
             return new UsuarioLoginResponseDTO(token, usuarioResponse);
     }
+
+    
+    public PedidoResponseDTO obterMeuPedidoPorId(Long id){
+        PedidoResponseDTO meupedido = pedidoService.obterPorId(id);
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!(meupedido.getUsuario().getId() == usuario.getId())){
+            throw new ResourceNotFoundException("Esse pedido não pertence a esse usuario");
+        }
+        return meupedido;
+    }
+
+    public List<PedidoResponseDTO> obterTodosPedidoNoMeuId(){
+        List <PedidoResponseDTO> todosPedidos = pedidoService.obterTodos();
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List <PedidoResponseDTO> meusPedidosAtualizados = new ArrayList<>();
+        for(PedidoResponseDTO pedido:todosPedidos){
+        if(pedido.getUsuario().getId() == usuario.getId()){
+            meusPedidosAtualizados.add(pedido);
+        }
+    }
+    if(meusPedidosAtualizados.isEmpty()){
+        throw new ResourceNotFoundException("Você não tem nenhum pedido.");   
+    }
+    return meusPedidosAtualizados;
+    }
+
+    
 }

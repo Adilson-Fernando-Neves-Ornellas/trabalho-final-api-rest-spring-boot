@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginRequestDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioLoginResponseDTO;
 import br.com.serratec.ecommerce.dto.usuario.UsuarioRequestDTO;
@@ -40,6 +42,16 @@ public class UsuarioController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable long id) {
         return ResponseEntity.ok(usuarioService.obterPorId(id));
+    }
+
+    @GetMapping("/pedido/{id}")
+    public ResponseEntity<PedidoResponseDTO> obterMeuPedidoPorId(@PathVariable long id) {
+        return ResponseEntity.ok(usuarioService.obterMeuPedidoPorId(id));
+    }
+
+    @GetMapping("/pedidos")
+    public ResponseEntity<List<PedidoResponseDTO>> obterTodosPedidoNoMeuId() {
+        return ResponseEntity.ok(usuarioService.obterTodosPedidoNoMeuId());
     }
 
     @PostMapping

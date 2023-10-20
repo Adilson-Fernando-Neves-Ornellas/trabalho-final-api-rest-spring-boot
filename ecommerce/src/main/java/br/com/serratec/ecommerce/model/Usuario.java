@@ -177,8 +177,10 @@ public class Usuario implements UserDetails{
         return true;
     }
     
-    public void validarPerfil(Perfil perfil) { 
+    public void validarPerfil(String s) { 
+        
         EnumSet<Perfil> perfisValido = EnumSet.of(Perfil.CLIENTE, Perfil.ADMIN);
+        
         if (!perfisValido.contains(perfil)) {
             throw new IllegalArgumentException("O perfil " + perfil + " não é válido.");
         }
