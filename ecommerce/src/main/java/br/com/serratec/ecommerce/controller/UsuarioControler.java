@@ -32,52 +32,52 @@ public class UsuarioControler {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<List<UsuarioResponseDTO>> obterTodos(){
+    public ResponseEntity<List<UsuarioResponseDTO>> obterTodos() {
         return ResponseEntity.ok(usuarioService.obterTodos());
     }
-    
+
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable long id){
+    public ResponseEntity<UsuarioResponseDTO> obterPorId(@PathVariable long id) {
         return ResponseEntity.ok(usuarioService.obterPorId(id));
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario){
+    public ResponseEntity<UsuarioResponseDTO> adicionar(@RequestBody UsuarioRequestDTO usuario) {
         UsuarioResponseDTO usuarioAdicionado = usuarioService.adcionar(usuario);
-        testeEnvioDeEmail("Cliente Adicionado", usuario.getEmail(), "Cliente " + usuario.getNmUsuario() + " adicionado com Sucesso");
+        testeEnvioDeEmail("Cliente Adicionado", usuario.getEmail(),
+                "Cliente " + usuario.getNmUsuario() + " adicionado com Sucesso");
 
         return ResponseEntity
-            .status(201)
-            .body(usuarioAdicionado);
+                .status(201)
+                .body(usuarioAdicionado);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
+    public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario) {
         UsuarioResponseDTO usuarioAtualizado = usuarioService.atualizar(id, usuario);
 
-
         return ResponseEntity
-            .status(201)
-            .body(usuarioAtualizado);
+                .status(201)
+                .body(usuarioAtualizado);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<?> deletar(@PathVariable long id){
+    public ResponseEntity<?> deletar(@PathVariable long id) {
         usuarioService.deletar(id);
 
         return ResponseEntity
-            .status(204)
-            .build();
+                .status(204)
+                .build();
     }
 
     // ----------------------------------------------
-    // ENVIO DE EMAIL 
+    // ENVIO DE EMAIL
     @Autowired
     private EmailService emailServiceAction;
 
-    public ResponseEntity<?> testeEnvioDeEmail(String assunto, String emailDestinatario, String mensagem ){
+    public ResponseEntity<?> testeEnvioDeEmail(String assunto, String emailDestinatario, String mensagem) {
 
         List<String> destinatarios = new ArrayList<>();
         destinatarios.add(emailDestinatario);
@@ -90,12 +90,13 @@ public class UsuarioControler {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UsuarioLoginResponseDTO> logar(@RequestBody UsuarioLoginRequestDTO usuariologinRequest){
-        
-        UsuarioLoginResponseDTO usuarioLogado = usuarioService.logar(usuariologinRequest.getEmail(), usuariologinRequest.getSenha());
-        
+    public ResponseEntity<UsuarioLoginResponseDTO> logar(@RequestBody UsuarioLoginRequestDTO usuariologinRequest) {
+
+        UsuarioLoginResponseDTO usuarioLogado = usuarioService.logar(usuariologinRequest.getEmail(),
+                usuariologinRequest.getSenha());
+
         return ResponseEntity
-            .status(200)
-            .body(usuarioLogado);
+                .status(200)
+                .body(usuarioLogado);
     }
 }

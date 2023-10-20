@@ -5,7 +5,6 @@ public class UsuarioRequestDTO extends UsuarioBaseDTO{
 
     private String senha;
     private String email;
-    private String telefone;
 
     public String getSenha() {
         return senha;
@@ -22,16 +21,6 @@ public class UsuarioRequestDTO extends UsuarioBaseDTO{
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    
 
 }
 

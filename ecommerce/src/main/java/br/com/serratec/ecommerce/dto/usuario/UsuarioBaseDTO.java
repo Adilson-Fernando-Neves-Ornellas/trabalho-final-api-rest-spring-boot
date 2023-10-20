@@ -8,7 +8,16 @@ public abstract class UsuarioBaseDTO {
     private String login;
     private Perfil perfil;
     private String fotoUsuario;
+    private String telefone;
 
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public String getNmUsuario() {
         return nmUsuario;

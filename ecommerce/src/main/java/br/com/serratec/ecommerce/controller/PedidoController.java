@@ -26,7 +26,7 @@ import br.com.serratec.ecommerce.service.UsuarioService;
 @RestController
 @RequestMapping("/pedidos")
 public class PedidoController {
-    
+
     @Autowired
     private PedidoService pedidoService;
 
@@ -45,14 +45,18 @@ public class PedidoController {
     @GetMapping("/{id}")
     public ResponseEntity<PedidoResponseDTO> obterPorId(@PathVariable Long id) {
         return ResponseEntity.ok(pedidoService.obterPorId(id));
-    } 
+    }
 
     @PostMapping
-    public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {     
+    public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedido.getIdUsuario());
-        
+
         PedidoResponseDTO pedidoAdicionado = pedidoService.savePedido(pedido);
-        EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(),pedidoAdicionado.getDescontoTotal(),pedidoAdicionado.getAcrescimoTotal(),pedidoAdicionado.getValorFinal(),pedidoAdicionado.getFormaPagamento(),pedidoAdicionado.getObservacao(), pedido.getPedidoItens(), "Cliente "+ usuarioResponse.getNmUsuario()+ ", seu pedido de numero "+ pedidoAdicionado.getId()+" foi adicionado com Sucesso");
+        EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(), pedidoAdicionado.getDescontoTotal(),
+                pedidoAdicionado.getAcrescimoTotal(), pedidoAdicionado.getValorFinal(),
+                pedidoAdicionado.getFormaPagamento(), pedidoAdicionado.getObservacao(), pedido.getPedidoItens(),
+                "Cliente " + usuarioResponse.getNmUsuario() + ", seu pedido de numero " + pedidoAdicionado.getId()
+                        + " foi adicionado com Sucesso");
 
         return ResponseEntity
                 .status(201)
@@ -60,12 +64,13 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id, @RequestBody PedidoRequestDTO pedidoRequest) {
+    public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id,
+            @RequestBody PedidoRequestDTO pedidoRequest) {
         PedidoResponseDTO pedidoAtualizado = pedidoService.atualizar(id, pedidoRequest);
 
         return ResponseEntity
-            .status(200)
-            .body(pedidoAtualizado);
+                .status(200)
+                .body(pedidoAtualizado);
     }
 
     @DeleteMapping("/{id}")
@@ -74,34 +79,36 @@ public class PedidoController {
         pedidoService.deletar(id);
 
         return ResponseEntity
-            .status(204)
-            .build();
+                .status(204)
+                .build();
     }
 
     // ----------------------------------------------
-    // ENVIO DE EMAIL 
+    // ENVIO DE EMAIL
     @Autowired
     private EmailService emailServiceAction;
 
-    public ResponseEntity<?> EnvioDeEmail(String assunto, String emailDestinatario, double descontoTotal, double acrescimoTotal, double valorFinal, FormaPagamento formaPagamento, String observacao, List<PedidoItens> pedidoItens, String titulo) {
+    public ResponseEntity<?> EnvioDeEmail(String assunto, String emailDestinatario, double descontoTotal,
+            double acrescimoTotal, double valorFinal, FormaPagamento formaPagamento, String observacao,
+            List<PedidoItens> pedidoItens, String titulo) {
         // Construa o corpo do email em formato HTML
         String mensagem = "<html><head><title>" + assunto + "</title></head><body>";
-        
+
         // Título
-        mensagem += "<h1>" +titulo+ "</h1>";
-        
+        mensagem += "<h1>" + titulo + "</h1>";
+
         // Lista de Itens do Pedido
         mensagem += "<h2>Itens do Pedido</h2>";
         mensagem += "<ul>";
         for (PedidoItens item : pedidoItens) {
             mensagem += "<li>" +
-                        "Id do Produto: " + item.getIdPedidoItens() + "<br>" +
-                        "Acrescimo do Produto: " + item.getAcresProduto() + "<br>" +
-                        "Desconto do produto: " + item.getDescProduto() + "<br>" +
-                        "Quantidade: " + item.getQuantidade() + " unidades" + "<br>" +
-                        "Valor unitario do produto: " + item.getVlUnitario()+ " unidades" + "<br>" +
-                        "Valor total dos produtos: " + item.getValorTotal() + "<br>" +
-                        "</li>" + "<br>" ;
+                    "Id do Produto: " + item.getIdPedidoItens() + "<br>" +
+                    "Acrescimo do Produto: " + item.getAcresProduto() + "<br>" +
+                    "Desconto do produto: " + item.getDescProduto() + "<br>" +
+                    "Quantidade: " + item.getQuantidade() + " unidades" + "<br>" +
+                    "Valor unitario do produto: " + item.getVlUnitario() + " unidades" + "<br>" +
+                    "Valor total dos produtos: " + item.getValorTotal() + "<br>" +
+                    "</li>" + "<br>";
         }
         mensagem += "</ul>";
 
@@ -111,7 +118,7 @@ public class PedidoController {
         mensagem += "<p>Desconto Total: " + descontoTotal + "</p>";
         mensagem += "<p>Observação: " + observacao + "</p>";
         mensagem += "<p>Valor Final: " + valorFinal + "</p>";
-        
+
         mensagem += "</body></html>";
 
         List<String> destinatarios = new ArrayList<>();
@@ -124,4 +131,4 @@ public class PedidoController {
         return ResponseEntity.status(200).body("E-mail enviado com sucesso!!!");
     }
 
-}      
+}

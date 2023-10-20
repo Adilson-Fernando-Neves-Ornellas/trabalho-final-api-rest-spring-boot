@@ -12,12 +12,12 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 @PropertySource("classpath:env/mail.properties")
 public class EmailConfig {
-    
+
     @Autowired
     private Environment env;
 
     @Bean
-    public JavaMailSender mailSender(){
+    public JavaMailSender mailSender() {
 
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
@@ -27,10 +27,10 @@ public class EmailConfig {
         mailSender.setPassword(env.getProperty("mail.smtp.password"));
 
         Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol",  "smtp");
+        props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.debug","true");
+        props.setProperty("mail.debug", "true");
 
         return mailSender;
     }
