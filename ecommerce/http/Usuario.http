@@ -1,6 +1,6 @@
 GET http://localhost:8080/usuarios
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3Njg1NjY1LCJleHAiOjE2OTc3NzIwNjV9.QAbYJAnVQXJa9pHVWwq_HkfuFEWatTdWxpAVTTfDKSI
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3LCJleHAiOjE2OTc5MTg5MTd9.GgqSkV18DFsaz4ERntbvL8aRZku6h6lz3jINEoEo7XQ
 ###
 
 GET http://localhost:8080/usuarios/1
@@ -10,12 +10,25 @@ POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-    "nmUsuario": "Adilson Fernando",
-    "login": "rorivaldinho1",
+    "nmUsuario": "Admin da Silva",
+    "login": "administrador",
     "senha": "1234567",
-    "email": "ornellas00@hotmail.com",
-    "telefone": "219929456290",
+    "email": "admin@hotmail.com",
+    "telefone": "2199999991",
     "perfil": "ADMIN"
+}
+###
+
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+    "nmUsuario": "Cliente da Silva",
+    "login": "cliente",
+    "senha": "1234567",
+    "email": "cliente@hotmail.com",
+    "telefone": "2199999992",
+    "perfil": "CLIENTE"
 }
 ###
 
@@ -23,7 +36,7 @@ POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
 {
-    "email": "ornellas00@hotmail.com",
+    "email": "admin@hotmail.com",
     "senha": "1234567"
 }
 
@@ -33,23 +46,24 @@ POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
 {
-    "email": "ornellas00@hotmail.com",
+    "email": "cliente@hotmail.com",
     "senha": "12345687"
 }
 
 ###
 
-i'm having lunch rn teache
-POST http://localhost:8080/usuarios/login
+PUT http://localhost:8080/usuarios/3
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3LCJleHAiOjE2OTc5MTg5MTd9.GgqSkV18DFsaz4ERntbvL8aRZku6h6lz3jINEoEo7XQ
 
 {
-    "nmUsuario": "Rorivaldo3",
-    "login": "rorivaldinho3",
+    "nmUsuario": "Cliente da Silva",
+    "login": "cliente",
     "senha": "1234567",
-    "email": "rorivadfg3@gmail.com",
-    "telefone": "219929456293",
-    "perfil": "ADMIN"
+    "email": "cliente@hotmail.com",
+    "telefone": "2199999992",
+    "perfil": "CLIENTE",
+    "statusUsuario": false
 }
 ###
 
@@ -65,4 +79,8 @@ Content-Type: application/json
     "telefone": "219929456290",
     "perfil": "ADMIN"
 }
+###
+
+DELETE http://localhost:8080/usuarios/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3LCJleHAiOjE2OTc5MTkwODd9.5rVW3fiB0pzpI7PGj2osH9DWKt7d28ZTrBclUvoM6Oc
 ###

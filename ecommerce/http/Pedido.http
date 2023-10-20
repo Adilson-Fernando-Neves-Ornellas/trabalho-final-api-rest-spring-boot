@@ -1,4 +1,5 @@
 GET http://localhost:8080/pedidos
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3LCJleHAiOjE2OTc5MTkwODd9.5rVW3fiB0pzpI7PGj2osH9DWKt7d28ZTrBclUvoM6Oc
 ###
 
 GET http://localhost:8080/pedidos/2
@@ -6,29 +7,29 @@ GET http://localhost:8080/pedidos/2
 
 POST http://localhost:8080/pedidos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3LCJleHAiOjE2OTc5MTkwODd9.5rVW3fiB0pzpI7PGj2osH9DWKt7d28ZTrBclUvoM6Oc
 
 {
     "descontoTotal": 5,
     "acrescimoTotal": 0,
     "formaPagamento": "PIX",
-    "idUsuario": 1,
+    "idUsuario": 3,
     "pedidoItens": [
         {
             "produto": {
-                "idProd": 6
+                "idProd": 1
             },
             "descProduto": 0,
             "acresProduto": 0,
-            "quantidade": 5
+            "quantidade": 1
         },
         {
             "produto": {
-                "idProd": 6
+                "idProd": 2
             },
             "descProduto": 0,
             "acresProduto": 5,
-            "quantidade": 5
+            "quantidade": 2
         }
     ]
 }

@@ -8,7 +8,15 @@ public abstract class UsuarioBaseDTO {
     private String login;
     private Perfil perfil;
     private String fotoUsuario;
+    private boolean statusUsuario;
 
+    public boolean isStatusUsuario() {
+        return statusUsuario;
+    }
+
+    public void setStatusUsuario(boolean statusUsuario) {
+        this.statusUsuario = statusUsuario;
+    }
 
     public String getNmUsuario() {
         return nmUsuario;

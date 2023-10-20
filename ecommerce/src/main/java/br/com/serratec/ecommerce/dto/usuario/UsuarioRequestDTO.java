@@ -30,8 +30,5 @@ public class UsuarioRequestDTO extends UsuarioBaseDTO{
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    
-
 }
 

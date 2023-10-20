@@ -56,7 +56,6 @@ public class UsuarioControler {
     public ResponseEntity<UsuarioResponseDTO> atualizar(@PathVariable long id, @RequestBody UsuarioRequestDTO usuario){
         UsuarioResponseDTO usuarioAtualizado = usuarioService.atualizar(id, usuario);
 
-
         return ResponseEntity
             .status(201)
             .body(usuarioAtualizado);
