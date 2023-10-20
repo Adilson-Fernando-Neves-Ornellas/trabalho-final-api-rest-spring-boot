@@ -32,6 +32,5 @@ public class UsuarioResponseDTO extends UsuarioBaseDTO{
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
-
 }
 

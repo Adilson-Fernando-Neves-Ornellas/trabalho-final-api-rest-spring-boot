@@ -28,6 +28,9 @@ public class PedidoService {
     private ProdutoService produtoService;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     public ModelMapper mapper;
 
     public List<PedidoResponseDTO> obterTodos() {
@@ -50,6 +53,12 @@ public class PedidoService {
 
     @Transactional
     public PedidoResponseDTO savePedido(PedidoRequestDTO pedido) {
+
+        usuarioService.obterPorId(pedido.getIdUsuario());
+        if(!usuarioService.verificarSatusUsuario(pedido.getIdUsuario())) {
+            throw new RuntimeException("O usuário com ID: " + pedido.getIdUsuario() + " está desativado.");
+        }
+
         // Antes de salvar o pedido, associe os itens ao pedido
         Pedido pedidoModel = mapper.map(pedido, Pedido.class);
 

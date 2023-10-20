@@ -8,8 +8,16 @@ public abstract class UsuarioBaseDTO {
     private String login;
     private Perfil perfil;
     private String fotoUsuario;
+    private boolean statusUsuario;
     private String telefone;
 
+    public boolean isStatusUsuario() {
+        return statusUsuario;
+    }
+
+    public void setStatusUsuario(boolean statusUsuario) {
+        this.statusUsuario = statusUsuario;
+    }
 
     public String getTelefone() {
         return telefone;
@@ -50,6 +58,5 @@ public abstract class UsuarioBaseDTO {
     public void setFotoUsuario(String fotoUsuario) {
         this.fotoUsuario = fotoUsuario;
     } 
-    
 }
 

@@ -46,13 +46,16 @@ public class Usuario implements UserDetails{
     private Perfil perfil;
 
     private String fotoUsuario;
-   
+
+    @Column(nullable = false)
+    private boolean statusUsuario;
+
     public Usuario(){
         this.dataCadastro = new Date();
     }   
 
     public Usuario(long id, String nmUsuario, String login, String senha, String email, String telefone,
-            Perfil perfil, String fotoUsuario) {
+            Perfil perfil, String fotoUsuario, boolean statusUsuario) {
         this.id = id;
         this.nmUsuario = nmUsuario;
         this.login = login;
@@ -62,7 +65,7 @@ public class Usuario implements UserDetails{
         this.dataCadastro = new Date();
         this.perfil = perfil;
         this.fotoUsuario = fotoUsuario;
-       
+        this.statusUsuario = statusUsuario;
     }
 
     public Long getId() {
@@ -135,6 +138,14 @@ public class Usuario implements UserDetails{
 
     public void setFotoUsuario(String fotoUsuario) {
         this.fotoUsuario = fotoUsuario;
+    }
+
+    public boolean isStatusUsuario() {
+        return statusUsuario;
+    }
+
+    public void setStatusUsuario(boolean statusUsuario) {
+        this.statusUsuario = statusUsuario;
     }
 
     @Override
