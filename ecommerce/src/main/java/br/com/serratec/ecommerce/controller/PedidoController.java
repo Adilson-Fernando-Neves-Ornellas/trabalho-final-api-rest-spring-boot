@@ -94,20 +94,29 @@ public class PedidoController {
     // Título
     mensagem += "<h1>" +titulo+ "</h1>";
     
+
+    
+    // Lista de Itens do Pedido
+    mensagem += "<h2>Itens do Pedido</h2>";
+    mensagem += "<ul>";
+    for (PedidoItens item : pedidoItens) {
+        mensagem += "<li>" +
+                    "Id do Produto: " + item.getIdPedidoItens() + "<br>" +
+                    "Acrescimo do Produto: " + item.getAcresProduto() + "<br>" +
+                    "Desconto do produto: " + item.getDescProduto() + "<br>" +
+                    "Quantidade: " + item.getQuantidade() + " unidades" + "<br>" +
+                    "Valor unitario do produto: " + item.getVlUnitario()+ " unidades" + "<br>" +
+                    "Valor total dos produtos: " + item.getValorTotal() + "<br>" +
+                    "</li>" + "<br>" ;
+    }
+    mensagem += "</ul>";
+
     // Informações do pedido
     mensagem += "<p>Forma de Pagamento: " + formaPagamento + "</p>";
     mensagem += "<p>Acrescimo Total: " + acrescimoTotal + "</p>";
     mensagem += "<p>Desconto Total: " + descontoTotal + "</p>";
     mensagem += "<p>Observação: " + observacao + "</p>";
     mensagem += "<p>Valor Final: " + valorFinal + "</p>";
-    
-    // Lista de Itens do Pedido
-    mensagem += "<h2>Itens do Pedido</h2>";
-    mensagem += "<ul>";
-    for (PedidoItens item : pedidoItens) {
-        mensagem += "<li>"+"Id do Produto: "+ item.getIdPedidoItens() + "Desconto do produto: " + item.getDescProduto() + "| Quantidade Item: " + item.getQuantidade() + " unidades</li>";
-    }
-    mensagem += "</ul>";
     
     mensagem += "</body></html>";
 

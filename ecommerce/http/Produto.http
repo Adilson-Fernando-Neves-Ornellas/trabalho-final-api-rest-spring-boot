@@ -6,10 +6,10 @@ GET http://localhost:8080/produtos/1
 
 POST http://localhost:8080/produtos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM2MTA1LCJleHAiOjE2OTc4MjI1MDV9.mt9tKfbOz3eJEFFfYJRrlfLf2pGkDoaYme8xXoDwj3w
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
 
 {
-  "nomeProd": "Camisetex",
+  "nomeProd": "Camisetex4",
   "valorProd": 50,
   "estoqueProd": 10,
   "descricaoProd": "Camisetex brabo",
@@ -21,7 +21,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM2MTA1L
 
 POST http://localhost:8080/produtos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyLCJleHAiOjE2OTc4MjA5MDJ9.j195XssraOzXdJ-3LZi4rQ4xy0-IR7GLvuOsj_b5Ox4
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
 
 {
     "nomeProd": "Abobrinha",
@@ -29,7 +29,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzM0NTAyL
     "estoqueProd": "10",
     "statusProd": true,
     "descricaoProd": "Abobrinha caríssima",
-    "idCategoria": 1
+    "idCategoria": 4
 }
 ###
 
