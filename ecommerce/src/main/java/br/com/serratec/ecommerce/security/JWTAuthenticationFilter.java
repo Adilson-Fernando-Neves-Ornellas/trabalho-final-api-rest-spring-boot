@@ -53,6 +53,7 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
                     SecurityContextHolder.getContext().setAuthentication(autenticacao); 
                 }
 
+                response.addHeader("Access-Control-Expose-Headers", "Authorization");
                 // 4 filtrar regras do usuario  
                 filterChain.doFilter(request, response);
     }
