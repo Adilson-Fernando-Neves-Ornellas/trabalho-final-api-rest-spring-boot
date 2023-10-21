@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.service.ProdutoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/produtos")
+@SecurityRequirement(name = "bearer-key")
 public class ProdutoController {
 
     @Autowired

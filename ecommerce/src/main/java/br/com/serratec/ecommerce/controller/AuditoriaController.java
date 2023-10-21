@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.serratec.ecommerce.dto.auditoria.AuditoriaResponseDTO;
 import br.com.serratec.ecommerce.service.AuditoriaService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/auditorias")
+@SecurityRequirement(name = "bearer-key")
 public class AuditoriaController {
 
     @Autowired

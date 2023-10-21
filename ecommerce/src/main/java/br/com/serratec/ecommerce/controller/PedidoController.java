@@ -22,9 +22,11 @@ import br.com.serratec.ecommerce.model.email.Email;
 import br.com.serratec.ecommerce.service.EmailService;
 import br.com.serratec.ecommerce.service.PedidoService;
 import br.com.serratec.ecommerce.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 
 @RestController
 @RequestMapping("/pedidos")
+@SecurityRequirement(name = "bearer-key")
 public class PedidoController {
 
     @Autowired

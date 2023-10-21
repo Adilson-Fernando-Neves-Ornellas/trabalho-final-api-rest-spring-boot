@@ -1,8 +1,4 @@
 GET http://localhost:8080/usuarios
-<<<<<<< HEAD
-=======
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODE4MzM5LCJleHAiOjE2OTc5MDQ3Mzl9.URW-hzH1nOGKfk6AqeFnG8a-3v9qBGk2j84I50qXQmc
->>>>>>> 5dc2fe2ada6b2f1e985a5e3bd647d5876f51ea6d
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3LCJleHAiOjE2OTc5MTg5MTd9.GgqSkV18DFsaz4ERntbvL8aRZku6h6lz3jINEoEo7XQ
 ###
