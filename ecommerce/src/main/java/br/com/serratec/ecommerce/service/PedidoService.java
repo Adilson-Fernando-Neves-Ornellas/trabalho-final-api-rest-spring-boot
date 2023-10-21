@@ -16,7 +16,6 @@ import br.com.serratec.ecommerce.model.PedidoItens;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
-import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class PedidoService {

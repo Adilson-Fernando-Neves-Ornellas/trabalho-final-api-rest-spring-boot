@@ -29,11 +29,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyL
     "estoqueProd": "10",
     "statusProd": true,
     "descricaoProd": "Abobrinha caríssima",
-<<<<<<< HEAD
     "idCategoria": 2
-=======
-    "idCategoria": 1
->>>>>>> 5dc2fe2ada6b2f1e985a5e3bd647d5876f51ea6d
 }
 ###
 

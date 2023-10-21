@@ -1,11 +1,5 @@
 GET http://localhost:8080/pedidos
-<<<<<<< HEAD
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3LCJleHAiOjE2OTc5MTkwODd9.5rVW3fiB0pzpI7PGj2osH9DWKt7d28ZTrBclUvoM6Oc
-=======
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
-
->>>>>>> 5dc2fe2ada6b2f1e985a5e3bd647d5876f51ea6d
-###
 
 GET http://localhost:8080/pedidos/2
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
@@ -32,11 +26,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3L
         },
         {
             "produto": {
-<<<<<<< HEAD
                 "idProd": 2
-=======
-                "idProd": 3
->>>>>>> 5dc2fe2ada6b2f1e985a5e3bd647d5876f51ea6d
             },
             "descProduto": 0,
             "acresProduto": 5,

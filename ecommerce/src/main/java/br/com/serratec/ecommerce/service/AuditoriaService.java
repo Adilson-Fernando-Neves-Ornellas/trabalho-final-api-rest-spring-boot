@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import br.com.serratec.ecommerce.dto.auditoria.AuditoriaResponseDTO;
 import br.com.serratec.ecommerce.enums.TipoEntidade;
 import br.com.serratec.ecommerce.model.Auditoria;

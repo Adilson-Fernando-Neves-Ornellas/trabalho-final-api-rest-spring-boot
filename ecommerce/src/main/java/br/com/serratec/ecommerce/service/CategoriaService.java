@@ -12,7 +12,6 @@ import br.com.serratec.ecommerce.model.Categoria;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.CategoriaRepository;
-import br.com.serratec.ecommerce.utils.Utils;
 
 @Service
 public class CategoriaService {
