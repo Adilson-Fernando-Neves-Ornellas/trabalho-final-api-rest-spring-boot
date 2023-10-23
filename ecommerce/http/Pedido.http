@@ -33,7 +33,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzL
 }
 ###
 
-# ATUALIZAR DADOS DO PEDIDO (SOMENTE ADMIN PODER ACESSAR ESTE END
+# ATUALIZAR DADOS DO PEDIDO
 PUT http://localhost:8080/pedidos/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU

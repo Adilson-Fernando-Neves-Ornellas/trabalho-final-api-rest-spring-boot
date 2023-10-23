@@ -58,3 +58,4 @@ Authorization: Bearer  eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMz
 DELETE http://localhost:8080/categorias/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
+###
