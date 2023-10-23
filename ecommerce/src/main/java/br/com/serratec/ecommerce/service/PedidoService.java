@@ -88,7 +88,9 @@ public class PedidoService {
         }
         pedidoRequest.setId(id);
         pedidoRequest.setIdUsuario(pedidoBanco.getUsuario().getId());
-        pedidoRequest.setFormaPagamento(pedidoBanco.getFormaPagamento());
+        pedidoRequest.setFormaPagamento(pedidoRequest.getFormaPagamento() != null ? pedidoRequest.getFormaPagamento() : pedidoBanco.getFormaPagamento());
+        pedidoRequest.setDescontoTotal(pedidoRequest.getDescontoTotal() > 0 ? pedidoRequest.getDescontoTotal() : pedidoBanco.getDescontoTotal());
+        pedidoRequest.setAcrescimoTotal(pedidoRequest.getAcrescimoTotal() > 0 ? pedidoRequest.getAcrescimoTotal() : pedidoBanco.getAcrescimoTotal());
 
         // Iterar sobre os itens do pedido na requisição
         for (PedidoItens item : pedidoBanco.getItens()) {

@@ -144,7 +144,6 @@ public class UsuarioService  {
             return new UsuarioLoginResponseDTO(token, usuarioResponse);
     }
 
-    
     public PedidoResponseDTO obterMeuPedidoPorId(Long id){
         PedidoResponseDTO meupedido = pedidoService.obterPorId(id);
         Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -167,7 +166,5 @@ public class UsuarioService  {
         throw new ResourceNotFoundException("Você não tem nenhum pedido.");   
     }
     return meusPedidosAtualizados;
-    }
-
-    
+    } 
 }

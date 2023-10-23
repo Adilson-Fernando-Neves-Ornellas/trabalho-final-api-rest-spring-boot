@@ -48,7 +48,7 @@ Content-Type: application/json
 
 {
     "email": "cliente@hotmail.com",
-    "senha": "12345687"
+    "senha": "1234567"
 }
 
 ###
