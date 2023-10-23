@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import br.com.serratec.ecommerce.dto.pedido.PedidoRequestDTO;
 import br.com.serratec.ecommerce.dto.pedido.PedidoResponseDTO;
@@ -13,6 +14,7 @@ import br.com.serratec.ecommerce.dto.produto.ProdutoRequestDTO;
 import br.com.serratec.ecommerce.dto.produto.ProdutoResponseDTO;
 import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.PedidoItens;
+import br.com.serratec.ecommerce.model.Usuario;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
 import br.com.serratec.ecommerce.repository.PedidoItensRepository;
@@ -80,7 +82,10 @@ public class PedidoService {
     public PedidoResponseDTO atualizar(long id, PedidoRequestDTO pedidoRequest) {
 
         Pedido pedidoBanco = mapper.map(obterPorId(id), Pedido.class);
-
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(!(pedidoBanco.getUsuario().getId() == usuario.getId())){
+            throw new ResourceNotFoundException("Esse pedido não pertence a esse usuario");
+        }
         pedidoRequest.setId(id);
         pedidoRequest.setIdUsuario(pedidoBanco.getUsuario().getId());
         pedidoRequest.setFormaPagamento(pedidoBanco.getFormaPagamento());

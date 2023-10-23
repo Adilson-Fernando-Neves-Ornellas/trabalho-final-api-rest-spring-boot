@@ -68,6 +68,7 @@ public class PedidoController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('CLIENTE')")
     public ResponseEntity<PedidoResponseDTO> atualizar(@PathVariable Long id,
             @RequestBody PedidoRequestDTO pedidoRequest) {
         PedidoResponseDTO pedidoAtualizado = pedidoService.atualizar(id, pedidoRequest);
