@@ -1,12 +1,15 @@
+# BUSCA TODOS OS PRODUTOS 
 GET http://localhost:8080/produtos
 ###
 
-GET http://localhost:8080/produtos/4
+# BUSCA UM PRODDUTO ESPECIFICO PELO ID 
+GET http://localhost:8080/produtos/1
 ###
 
+# ADICIONA UM PRODUTO (PRECISA SER ADMIN) 
 POST http://localhost:8080/produtos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3LCJleHAiOjE2OTc5MTkwODd9.5rVW3fiB0pzpI7PGj2osH9DWKt7d28ZTrBclUvoM6Oc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 
 {
   "nomeProd": "Camisetex0",
@@ -19,9 +22,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3L
 }
 ###
 
+# ADICIONA UM PRODUTO 2(PRECISA SER ADMIN)
 POST http://localhost:8080/produtos
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 
 {
     "nomeProd": "Abobrinha",
@@ -33,14 +37,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyL
 }
 ###
 
-PUT http://localhost:8080/produtos/17
+# ATUALIZAR UM PRODUTO ESPECIFICO PELO ID (PRECISA SER ADMIN)
+PUT http://localhost:8080/produtos/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk3NzY1NjkyLCJleHAiOjE2OTc4NTIwOTJ9._3XJB-M8Pz0Af8iGd3S30wQyv6LyRvDJJt2lF_rHC9Q
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 
 {
-    "nomeProd": "optt22000222",
+    "nomeProd": "ABROBINHAATUALIZADO",
     "valorProd": 1700.5,
     "estoqueProd": 100,
     "statusProd": true,
     "idCategoria": 1
 }
+###
+
+# FAZ O DELETE DE UMA PRODUTO (DELETE LOGICO - DESATIVA UM PRODUTO - STATUS FALSE)
+DELETE http://localhost:8080/produtos/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU

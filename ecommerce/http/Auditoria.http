@@ -1,0 +1,11 @@
+# OBTER TODOS OS REGISTROS DE AUDITORIA (SOMENTE ADMIN)
+GET http://localhost:8080/auditorias
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
+###
+
+# OBTER O REGISTRO DE UMA AUDITORIA ESPECIFICA POR ID (SOMENTE ADMIN)
+GET http://localhost:8080/auditorias/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
+###

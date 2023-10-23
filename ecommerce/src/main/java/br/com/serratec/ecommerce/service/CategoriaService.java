@@ -1,6 +1,7 @@
 package br.com.serratec.ecommerce.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,12 +75,14 @@ public class CategoriaService {
 
     }
 
-    public void deletar(Long id) {
-      
-        var catBanco = obterPorId(id);
-        auditoriaService.infoRegistarAuditoria(TipoEntidade.CATEGORIA, "Deletado", catBanco , "");
+    public void deletar(long id) {
+        
+        Optional<Categoria> categoria = categoriaRepository.findById(id);
 
-        categoriaRepository.deleteById(id);
-    }
+        if(categoria.isPresent()) {
+            categoria.get().setStatusCate(false);
+         categoriaRepository.save(categoria.get());
+        }
+    } 
 
 }

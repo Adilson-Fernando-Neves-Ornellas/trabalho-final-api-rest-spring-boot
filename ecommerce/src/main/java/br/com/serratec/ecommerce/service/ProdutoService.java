@@ -93,11 +93,13 @@ public class ProdutoService {
     }
 
     public void deletar(long id) {
-       
-        var prodBanco = obterPorId(id);
-        auditoriaService.infoRegistarAuditoria(TipoEntidade.PRODUTO, "Deletado",prodBanco, "");
-        produtoRepositoryAction.deleteById(id);
-    }
+        Optional<Produto> produto = produtoRepositoryAction.findById(id);
+
+        if(produto.isPresent()) {
+            produto.get().setStatusProd(false);
+         produtoRepositoryAction.save(produto.get());
+        }
+    } 
 
     private void verificarCategoria(Categoria categoria) {
         if(categoria.getStatusCate() == false) {

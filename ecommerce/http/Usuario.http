@@ -1,25 +1,30 @@
+
+# BUSCA TODOS OS USUARIOS (se o token n estiver correto, da erro 401 )
 GET http://localhost:8080/usuarios
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3LCJleHAiOjE2OTc5MTg5MTd9.GgqSkV18DFsaz4ERntbvL8aRZku6h6lz3jINEoEo7XQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 ###
 
-GET http://localhost:8080/usuarios/2
+# BUSCA O USUARIO EXPECIFICO (se o token n estiver correto, da erro 401 )
+GET http://localhost:8080/usuarios/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODE4MzM5LCJleHAiOjE2OTc5MDQ3Mzl9.URW-hzH1nOGKfk6AqeFnG8a-3v9qBGk2j84I50qXQmc
 ###
 
+# CRIA UM NOVO USUARIO ADMIN
 POST http://localhost:8080/usuarios
 Content-Type: application/json
 
 {
-    "nmUsuario": "Admin da Silva",
+    "nmUsuario": "Adilson Fernando",
     "login": "administrador",
     "senha": "1234567",
-    "email": "admin@hotmail.com",
+    "email": "ornellas00@hotmail.com",
     "telefone": "2199999991",
     "perfil": "ADMIN"
 }
 ###
 
+# CRIA UM NOVO USUARIO CLIENTE
 POST http://localhost:8080/usuarios
 Content-Type: application/json
 
@@ -33,16 +38,18 @@ Content-Type: application/json
 }
 ###
 
+# FAZ LOGIN COM O USUARIO ADMIN DEPOIS DE JA CRIADO
 POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
 {
-    "email": "admin@hotmail.com",
+    "email": "ornellas00@hotmail.com",
     "senha": "1234567"
 }
 
 ###
 
+# FAZ LOGIN COM O USUARIO CLIENTE DEPOIS DE JA CRIADO 
 POST http://localhost:8080/usuarios/login
 Content-Type: application/json
 
@@ -53,9 +60,10 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/usuarios/3
+# ATUALIZA UM CLIENTE COLOCANDO O STATUS FALSE
+PUT http://localhost:8080/usuarios/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3LCJleHAiOjE2OTc5MTg5MTd9.GgqSkV18DFsaz4ERntbvL8aRZku6h6lz3jINEoEo7XQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 
 {
     "nmUsuario": "Cliente da Silva",
@@ -68,19 +76,36 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNTE3L
 }
 ###
 
+# ATUALIZA UM CLIENTE ESPECIFICO COLOCANDO STATUS TRUE
 PUT http://localhost:8080/usuarios/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODE4MzM5LCJleHAiOjE2OTc5MDQ3Mzl9.URW-hzH1nOGKfk6AqeFnG8a-3v9qBGk2j84I50qXQmc
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 Content-Type: application/json
 
 {
-    "nmUsuario": "Rorivaldo122",
-    "login": "rorivaldinho1",
+    "nmUsuario": "Rorivaldo124",
+    "login": "rorivaldinho31",
     "senha": "1234567",
-    "email": "rorivadfg1@gmail.com",
-    "perfil": "ADMIN"
+    "email": "rorivadfg22@gmail.com",
+    "telefone": "2199995932",
+    "perfil": "ADMIN",
+    "statusUsuario": true
 }
 ###
 
-DELETE http://localhost:8080/usuarios/1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwiaWF0IjoxNjk3ODMyNjg3LCJleHAiOjE2OTc5MTkwODd9.5rVW3fiB0pzpI7PGj2osH9DWKt7d28ZTrBclUvoM6Oc
+# FAZ O DELETE DE UM CLIENTE (DELETE LOGICO - DESATIVA O USUARIO - STATUS FALSE)
+DELETE http://localhost:8080/usuarios/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
+###
+
+
+########################################################################################################
+
+# OBTER O PEDIDO ESPECIFICO DO CLIENTE LOGADO PELO ID DO PEDIDO
+GET http://localhost:8080/usuarios/pedido/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
+###
+
+# OBTER TODOS OS PEDIDOS DO CLIENTE LOGADO
+GET http://localhost:8080/usuarios/pedidos
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjk4MDg1ODMzLCJleHAiOjE2OTgxNzIyMzN9.LY0a01Gj5v1Xp0KGxlKZAG0JrJs5NHh3jDDUBlNLtjU
 ###
