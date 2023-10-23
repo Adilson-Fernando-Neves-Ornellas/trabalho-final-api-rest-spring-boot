@@ -15,6 +15,7 @@ import br.com.serratec.ecommerce.model.Pedido;
 import br.com.serratec.ecommerce.model.PedidoItens;
 import br.com.serratec.ecommerce.model.exceptions.ResourceBadRequestException;
 import br.com.serratec.ecommerce.model.exceptions.ResourceNotFoundException;
+import br.com.serratec.ecommerce.repository.PedidoItensRepository;
 import br.com.serratec.ecommerce.repository.PedidoRespository;
 
 @Service
@@ -22,6 +23,9 @@ public class PedidoService {
 
     @Autowired
     private PedidoRespository pedidoRepository;
+
+    @Autowired
+    private PedidoItensRepository pedidoItensRepository;
 
     @Autowired
     private ProdutoService produtoService;
@@ -72,49 +76,34 @@ public class PedidoService {
         return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
 
+    @Transactional
     public PedidoResponseDTO atualizar(long id, PedidoRequestDTO pedidoRequest) {
 
-        Optional<Pedido> optPedido = pedidoRepository.findById(id);
+        Pedido pedidoBanco = mapper.map(obterPorId(id), Pedido.class);
 
-        if (optPedido.isEmpty()) {
-            throw new ResourceNotFoundException("Nenhum pedido encontrado com o ID: " + id);
-        }
-
-        Pedido pedidoBanco = optPedido.get();
+        pedidoRequest.setId(id);
+        pedidoRequest.setIdUsuario(pedidoBanco.getUsuario().getId());
+        pedidoRequest.setFormaPagamento(pedidoBanco.getFormaPagamento());
 
         // Iterar sobre os itens do pedido na requisição
-        for (PedidoItens itemRequest : pedidoRequest.getPedidoItens()) {
+        for (PedidoItens item : pedidoBanco.getItens()) {
             // Verificar se o item já existe no pedido
-            Optional<PedidoItens> itemOptional = pedidoBanco.getItens()
-                    .stream()
-                    .filter(item -> item.getIdPedidoItens() == itemRequest.getIdPedidoItens())
-                    .findFirst();
-
-            if (itemOptional.isPresent()) {
-                // Atualizar o item existente
-                PedidoItens itemBanco = itemOptional.get();
-                itemBanco.setQuantidade(itemRequest.getQuantidade());
-
-                // Atualizar o valor total do item
-                itemBanco = adicionarValorTotalItem(itemBanco);
-            } else {
-                // Adicionar o novo item à lista de itens do pedido
-                PedidoItens newItem = mapper.map(itemRequest, PedidoItens.class);
-                newItem = adicionarValorTotalItem(newItem);
-                newItem.setPedido(pedidoBanco);
-                pedidoBanco.getItens().add(newItem);
-            }
+            pedidoItensRepository.deleteById(item.getIdPedidoItens());
+            pedidoBanco.setItens(null);
         }
 
-        // Remover itens com quantidade menor ou igual a 0
-        pedidoBanco.getItens().removeIf(item -> item.getQuantidade() <= 0);
+        Pedido pedido = mapper.map(pedidoRequest, Pedido.class);
 
-        // Recalcular o valor final do pedido
-        pedidoBanco = adicionarValorFinal(pedidoBanco);
+        for (PedidoItens item : pedido.getItens()) {
+            item = adicionarValorTotalItem(item);
+            item.setPedido(pedido);
+        }
 
-        // Salvar o pedido atualizado no banco de dados
-        Pedido pedidoModel = pedidoRepository.save(pedidoBanco);
-        return mapper.map(pedidoModel, PedidoResponseDTO.class);
+        pedido = adicionarValorFinal(pedido);
+
+        pedido = pedidoRepository.save(pedido);
+
+        return mapper.map(pedido, PedidoResponseDTO.class);
     }
 
     public void deletar(long id) {
