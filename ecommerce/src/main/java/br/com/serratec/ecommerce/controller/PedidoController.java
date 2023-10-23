@@ -55,7 +55,7 @@ public class PedidoController {
     public ResponseEntity<PedidoResponseDTO> adicionar(@RequestBody PedidoRequestDTO pedido) {
         UsuarioResponseDTO usuarioResponse = usuarioService.obterPorId(pedido.getIdUsuario());
 
-        PedidoResponseDTO pedidoAdicionado = pedidoService.savePedido(pedido);
+        PedidoResponseDTO pedidoAdicionado = pedidoService.adicionar(pedido);
         EnvioDeEmail("Pedido Realizado com sucesso!", usuarioResponse.getEmail(), pedidoAdicionado.getDescontoTotal(),
                 pedidoAdicionado.getAcrescimoTotal(), pedidoAdicionado.getValorFinal(),
                 pedidoAdicionado.getFormaPagamento(), pedidoAdicionado.getObservacao(), pedido.getPedidoItens(),

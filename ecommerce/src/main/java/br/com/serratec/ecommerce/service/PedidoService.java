@@ -19,10 +19,10 @@ import br.com.serratec.ecommerce.repository.PedidoRespository;
 
 @Service
 public class PedidoService {
-    
+
     @Autowired
     private PedidoRespository pedidoRepository;
-    
+
     @Autowired
     private ProdutoService produtoService;
 
@@ -43,7 +43,7 @@ public class PedidoService {
     public PedidoResponseDTO obterPorId(long id) {
         Optional<Pedido> optPedido = pedidoRepository.findById(id);
 
-        if(optPedido.isEmpty()) {
+        if (optPedido.isEmpty()) {
             throw new ResourceNotFoundException("Nenhum pedido encontrado com o ID: " + id);
         }
 
@@ -51,10 +51,10 @@ public class PedidoService {
     }
 
     @Transactional
-    public PedidoResponseDTO savePedido(PedidoRequestDTO pedido) {
+    public PedidoResponseDTO adicionar(PedidoRequestDTO pedido) {
 
         usuarioService.obterPorId(pedido.getIdUsuario());
-        if(!usuarioService.verificarSatusUsuario(pedido.getIdUsuario())) {
+        if (!usuarioService.verificarSatusUsuario(pedido.getIdUsuario())) {
             throw new RuntimeException("O usuário com ID: " + pedido.getIdUsuario() + " está desativado.");
         }
 
@@ -67,25 +67,55 @@ public class PedidoService {
         }
 
         pedidoModel = adicionarValorFinal(pedidoModel);
-        
+
         pedidoModel = pedidoRepository.save(pedidoModel);
         return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
 
     public PedidoResponseDTO atualizar(long id, PedidoRequestDTO pedidoRequest) {
-        obterPorId(id);
 
-        pedidoRequest.setId(id);
+        Optional<Pedido> optPedido = pedidoRepository.findById(id);
 
-        Pedido pedidoBanco = pedidoRepository.findById(id)
-        .orElseThrow(() -> new ResourceNotFoundException("Nenhum registro encontardo para o id: " + id));
+        if (optPedido.isEmpty()) {
+            throw new ResourceNotFoundException("Nenhum pedido encontrado com o ID: " + id);
+        }
 
-        //Utils.copyNonNullProperties(pedidoBanco, pedidoRequest);
+        Pedido pedidoBanco = optPedido.get();
 
-        Pedido pedidoModel = pedidoRepository.save(mapper.map(pedidoRequest, Pedido.class));   
+        // Iterar sobre os itens do pedido na requisição
+        for (PedidoItens itemRequest : pedidoRequest.getPedidoItens()) {
+            // Verificar se o item já existe no pedido
+            Optional<PedidoItens> itemOptional = pedidoBanco.getItens()
+                    .stream()
+                    .filter(item -> item.getIdPedidoItens() == itemRequest.getIdPedidoItens())
+                    .findFirst();
+
+            if (itemOptional.isPresent()) {
+                // Atualizar o item existente
+                PedidoItens itemBanco = itemOptional.get();
+                itemBanco.setQuantidade(itemRequest.getQuantidade());
+
+                // Atualizar o valor total do item
+                itemBanco = adicionarValorTotalItem(itemBanco);
+            } else {
+                // Adicionar o novo item à lista de itens do pedido
+                PedidoItens newItem = mapper.map(itemRequest, PedidoItens.class);
+                newItem = adicionarValorTotalItem(newItem);
+                newItem.setPedido(pedidoBanco);
+                pedidoBanco.getItens().add(newItem);
+            }
+        }
+
+        // Remover itens com quantidade menor ou igual a 0
+        pedidoBanco.getItens().removeIf(item -> item.getQuantidade() <= 0);
+
+        // Recalcular o valor final do pedido
+        pedidoBanco = adicionarValorFinal(pedidoBanco);
+
+        // Salvar o pedido atualizado no banco de dados
+        Pedido pedidoModel = pedidoRepository.save(pedidoBanco);
         return mapper.map(pedidoModel, PedidoResponseDTO.class);
     }
-
 
     public void deletar(long id) {
         obterPorId(id);
@@ -93,19 +123,21 @@ public class PedidoService {
         pedidoRepository.deleteById(id);
     }
 
-
     private PedidoItens adicionarValorTotalItem(PedidoItens item) {
         long idProd = item.getProduto().getIdProd();
         ProdutoResponseDTO produtoResponse = produtoService.obterPorId(idProd);
 
         double estoqueAtual = produtoResponse.getEstoqueProd();
 
-        if(estoqueAtual < item.getQuantidade() || produtoResponse.getStatusProd() == false){
-            throw new ResourceBadRequestException("O produto com ID: " + idProd + " não possui estoque suficiente ou está indisponível");
+        if (estoqueAtual < item.getQuantidade() || produtoResponse.getStatusProd() == false) {
+            throw new ResourceBadRequestException(
+                    "O produto com ID: " + idProd + " não possui estoque suficiente ou está indisponível");
         }
         item.setVlUnitario(produtoResponse.getValorProd());
 
-        item.setValorTotal((produtoResponse.getValorProd() * ((item.getAcresProduto() / 100 + 1) - (item.getDescProduto() / 100))) * item.getQuantidade());
+        item.setValorTotal(
+                (produtoResponse.getValorProd() * ((item.getAcresProduto() / 100 + 1) - (item.getDescProduto() / 100)))
+                        * item.getQuantidade());
 
         produtoResponse.setEstoqueProd(produtoResponse.getEstoqueProd() - item.getQuantidade());
 
@@ -118,7 +150,7 @@ public class PedidoService {
 
         double valorTotal = 0;
 
-        for(PedidoItens item : pedido.getItens()) {
+        for (PedidoItens item : pedido.getItens()) {
             valorTotal += item.getValorTotal();
         }
 
